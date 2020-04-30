@@ -3,38 +3,18 @@ const router = express.Router();
 const admin = require("../controllers/AdminController.js");
 
 // Get all admin
-router.get("/", function (req, res) {
-  admin.list(req, res);
-});
+router.get("/", admin.list);
 
 // Get single admin by id
-router.get("/show/:id", function (req, res) {
-  admin.show(req, res);
-});
-
-// Create admin
-router.get("/create", function (req, res) {
-  admin.create(req, res);
-});
+router.get("/show/:id", admin.show);
 
 // Save admin
-router.post("/save", function (req, res) {
-  admin.save(req, res);
-});
-
-// Edit admin
-router.get("/edit/:id", function (req, res) {
-  admin.edit(req, res);
-});
+router.post("/save", admin.save);
 
 // Edit update
-router.post("/update/:id", function (req, res) {
-  admin.update(req, res);
-});
+router.post("/update/:id", admin.update);
 
 // Delete admin
-router.post("/delete/:id", function (req, res, next) {
-  admin.delete(req, res);
-});
+router.post("/delete/:id", admin.delete);
 
 module.exports = router;

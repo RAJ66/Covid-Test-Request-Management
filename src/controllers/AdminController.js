@@ -5,8 +5,8 @@ const adminController = {};
 
 adminController.list = async function (req, res) {
   try {
-    const employeesList = await Admin.find();
-    res.json({ employeesList });
+    const AdminList = await Admin.find();
+    res.json({ AdminList });
   } catch (e) {
     res.json({});
   }
@@ -18,10 +18,6 @@ adminController.show = async function (req, res) {
   res.json({ admin });
 };
 
-adminController.create = function (req, res) {
-  //res.render("../views/employees/create");
-};
-
 adminController.save = async function (req, res) {
   try {
     const result = await Admin.create(req.body);
@@ -29,12 +25,6 @@ adminController.save = async function (req, res) {
   } catch (e) {
     res.json({});
   }
-};
-
-adminController.edit = async function (req, res) {
-  const { id } = req.params;
-  const admin = await Admin.findById(id);
-  res.json({ admin });
 };
 
 adminController.update = async function (req, res) {

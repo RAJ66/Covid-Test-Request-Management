@@ -3,7 +3,7 @@ const Admin = require("../models/Admin");
 
 const adminController = {};
 
-adminController.list = async function (req, res) {
+adminController.getAll = async function (req, res) {
   try {
     const AdminList = await Admin.find();
     res.json({ AdminList });
@@ -12,13 +12,13 @@ adminController.list = async function (req, res) {
   }
 };
 
-adminController.show = async function (req, res) {
+adminController.getOne = async function (req, res) {
   const { id } = req.params;
   const admin = await Admin.findById(id);
   res.json({ admin });
 };
 
-adminController.save = async function (req, res) {
+adminController.create = async function (req, res) {
   try {
     const result = await Admin.create(req.body);
     res.json({ result });

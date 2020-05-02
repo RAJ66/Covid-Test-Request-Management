@@ -1,14 +1,13 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
 
-var multer = require("multer");
-const uploadConfig = require("../utils/upload");
-const upload = multer(uploadConfig);
+const usersRouter = require("./users");
+const employeesRouter = require("./employees");
+const adminRouter = require("./admin");
 
-const uploadController = require("../controllers/indexController");
+const router = express.Router();
 
-router.get("/", uploadController.page);
-
-router.post("/", upload.single("avatar"), uploadController.upload);
+router.use("/", employeesRouter);
+router.use("/", usersRouter);
+router.use("/", adminRouter);
 
 module.exports = router;

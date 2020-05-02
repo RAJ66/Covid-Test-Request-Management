@@ -9,12 +9,12 @@ router.get("/requests", request.list);
 router.post("/requests", request.save);
 
 //Get a single request by id
-router.get("/request/:requestId", request.show);
+router.get("/request/:id", request.show);
 
 //Edit/Update request
-router.put("/request/:requestId", request.update);
+router.put("/request/:id", request.update);
 
 //Delete request
-router.delete("/request/:requestId", request.delete);
+router.delete("/request/:id", request.delete);
 
 module.exports = router;

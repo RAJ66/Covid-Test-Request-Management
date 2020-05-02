@@ -3,7 +3,7 @@ const Employee = require("../models/Employee");
 
 const employeeController = {};
 
-employeeController.list = async function (req, res) {
+employeeController.getAll = async function (req, res) {
   try {
     const EmployeeList = await Employee.find();
     res.json({ EmployeeList });
@@ -12,13 +12,13 @@ employeeController.list = async function (req, res) {
   }
 };
 
-employeeController.show = async function (req, res) {
+employeeController.getOne = async function (req, res) {
   const { id } = req.params;
   const employee = await Employee.findById(id);
   res.json({ employee });
 };
 
-employeeController.save = async function (req, res) {
+employeeController.create = async function (req, res) {
   try {
     const result = await Employee.create(req.body);
     res.json({ result });

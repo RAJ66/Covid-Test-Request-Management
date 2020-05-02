@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const RequestSchema = new mongoose.Schema({
-  id: Number,
+  id: String,
   relevantInformation: String,
   userId: {
     type: mongoose.Schema.Types.ObjectId,

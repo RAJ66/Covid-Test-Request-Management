@@ -3,18 +3,18 @@ const router = express.Router();
 const employee = require("../controllers/EmployeeController.js");
 
 // Get all employees
-router.get("/", employee.list);
+router.get("/employees", employee.getAll);
 
 // Get single employee by id
-router.get("/show/:id", employee.show);
+router.get("/employee/:id", employee.getOne);
 
 // Save employee
-router.post("/save", employee.save);
+router.post("/employees", employee.create);
 
 // Edit employee
-router.post("/update/:id", employee.update);
+router.put("/employee/:id", employee.update);
 
 // Delete employee
-router.post("/delete/:id", employee.delete);
+router.delete("/employee/:id", employee.delete);
 
 module.exports = router;

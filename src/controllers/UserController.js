@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 var userController = {};
 
-userController.list = async function (req, res) {
+userController.getAll = async function (req, res) {
   try {
     const userList = await User.find();
     res.json({ userList });
@@ -12,13 +12,13 @@ userController.list = async function (req, res) {
   }
 };
 
-userController.show = async function (req, res) {
+userController.getOne = async function (req, res) {
   const { id } = req.params;
   const user = await User.findById(id);
   res.json({ user });
 };
 
-userController.save = async function (req, res) {
+userController.create = async function (req, res) {
   try {
     const result = await User.create(req.body);
     res.json({ result });

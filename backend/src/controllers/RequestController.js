@@ -5,7 +5,7 @@ const generateUniqueId = require("../utils/generateUniqueId");
 
 const requestController = {};
 
-requestController.list = async function (req, res) {
+requestController.getAll = async function (req, res) {
   try {
     const requestList = await Request.find();
     res.json({ requestList });
@@ -14,13 +14,13 @@ requestController.list = async function (req, res) {
   }
 };
 
-requestController.show = async function (req, res) {
+requestController.getOne = async function (req, res) {
   const { id } = req.params;
   const request = await Request.findById(id);
   res.json({ request });
 };
 
-requestController.save = async function (req, res) {
+requestController.create = async function (req, res) {
   try {
     const requestId = generateUniqueId();
     const result = await Request.create({ id: requestId, ...req.body });

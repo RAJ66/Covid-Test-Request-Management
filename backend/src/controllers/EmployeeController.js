@@ -34,7 +34,6 @@ employeeController.update = async function (req, res) {
 };
 
 employeeController.delete = async function (req, res) {
-  // TODO
   const { id } = req.params;
   await Employee.findByIdAndDelete(id);
   res.json({ delete: true });

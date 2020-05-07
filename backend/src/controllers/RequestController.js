@@ -7,7 +7,27 @@ const requestController = {};
 
 requestController.getAll = async function (req, res) {
   try {
-    const requestList = await Request.find();
+    const filters = {};
+    if (req.query.saude24) {
+      filters.saude24 = req.query.saude24;
+    }
+    if (req.query.riscProfession) {
+      filters.riscProfession = req.query.riscProfession;
+    }
+    if (req.query.riscGroup) {
+      filters.riscGroup = req.query.riscGroup;
+    }
+    if (req.query.userId) {
+      filters.userId = req.query.userId;
+    }
+    if (req.query.userState) {
+      filters.userState = req.query.userState;
+    }
+    if (req.query.requestState) {
+      filters.requestState = req.query.requestState;
+    }
+
+    const requestList = await Request.find(filters);
     res.json({ requestList });
   } catch (e) {
     res.json({});
@@ -16,7 +36,7 @@ requestController.getAll = async function (req, res) {
 
 requestController.getOne = async function (req, res) {
   const { id } = req.params;
-  const request = await Request.findById(id);
+  const request = await Request.find({ id: id });
   res.json({ request });
 };
 
@@ -47,7 +67,7 @@ requestController.create = async function (req, res) {
       res.json({ result });
     } else {
       previousUserStates.map((result) => {
-        if (result == "Infected") {
+        if (result == userInfected) {
           infectedCount++;
         }
       });
@@ -76,35 +96,60 @@ requestController.create = async function (req, res) {
 };
 
 requestController.update = async function (req, res) {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const userInfected = "Infected";
-  const userNotInfected = "Not Infected";
-  const testCanceled = "Canceled";
+    const userInfected = "Infected";
+    const userNotInfected = "Not Infected";
 
-  await Request.findByIdAndUpdate(id, req.body);
+    const requestDone = "Done";
+    const requestInProgress = "In Progress";
 
-  const request = await Request.findById(id);
+    const testResultPending = "Pending";
+    const testResultPositive = "Positive";
+    const testResultNegative = "Negative";
 
-  if (request.testResult1 == "Positive" || request.testResult2 == "Positive") {
-    await Request.findByIdAndUpdate(id, {
-      userState: userInfected,
-      testState2: testCanceled,
-      testResult2: testCanceled,
-    });
-    const updatedRequest = await Request.findById(id);
-    res.json({ updatedRequest });
-  } else if (
-    request.testResult1 == "Negative" &&
-    request.testResult2 == "Negative"
-  ) {
-    await Request.findByIdAndUpdate(id, {
-      userState: userNotInfected,
-    });
-    const updatedRequest = await Request.findById(id);
-    res.json({ updatedRequest });
-  } else {
-    res.json({ request });
+    await Request.findByIdAndUpdate(id, req.body);
+
+    const request = await Request.findById(id);
+
+    if (
+      request.firstTestResult == testResultPending &&
+      request.secondTestResult != testResultPending
+    ) {
+      await Request.findByIdAndUpdate(id, {
+        secondTestResult: testResultPending,
+      });
+      res.json({});
+    } else if (
+      request.firstTestResult == testResultPositive ||
+      request.secondTestResult == testResultPositive
+    ) {
+      await Request.findByIdAndUpdate(id, {
+        userState: userInfected,
+        requestState: requestDone,
+      });
+      const updatedRequest = await Request.findById(id);
+      res.json({ updatedRequest });
+    } else if (
+      request.firstTestResult == testResultNegative &&
+      request.secondTestResult == testResultNegative
+    ) {
+      await Request.findByIdAndUpdate(id, {
+        userState: userNotInfected,
+        requestState: requestDone,
+      });
+      const updatedRequest = await Request.findById(id);
+      res.json({ updatedRequest });
+    } else if (request.secondTestResult == testResultPending) {
+      await Request.findByIdAndUpdate(id, {
+        requestState: requestInProgress,
+      });
+      const updatedRequest = await Request.findById(id);
+      res.json({ updatedRequest });
+    }
+  } catch (e) {
+    res.json({});
   }
 };
 

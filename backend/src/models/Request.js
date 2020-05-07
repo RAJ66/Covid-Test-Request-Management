@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const RequestSchema = new mongoose.Schema({
   id: String,
-  saude24: { type: String, default: "Não" },
-  riscGroup: { type: String, default: "Não" },
-  riscProfession: { type: String, default: "Não" },
+  saude24: { type: String, default: "No" },
+  riscGroup: { type: String, default: "No" },
+  riscProfession: { type: String, default: "No" },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -14,12 +14,13 @@ const RequestSchema = new mongoose.Schema({
     ref: "Employee",
     default: undefined,
   },
-  testState1: { type: String, default: "Pending" },
-  testResult1: { type: String, default: "Pending" },
-  testState2: { type: String, default: "Pending" },
-  testResult2: { type: String, default: "Pending" },
+  firstTestResult: { type: String, default: "Pending" },
+  firstTestDate: Date,
+  secondTestResult: { type: String, default: "Pending" },
+  secondTestDate: Date,
+  requestState: { type: String, default: "Pending" },
   userState: String,
-  file: String,
+  file: { type: String, default: undefined },
   updated_at: { type: Date, default: Date.now },
 });
 

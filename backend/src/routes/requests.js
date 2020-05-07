@@ -3,13 +3,13 @@ const router = express.Router();
 const request = require("../controllers/RequestController.js");
 
 //Get all requests
-router.get("/requests", request.list);
+router.get("/requests", request.getAll);
 
 //Save request
-router.post("/requests", request.save);
+router.post("/requests", request.create);
 
 //Get a single request by id
-router.get("/request/:id", request.show);
+router.get("/request/:id", request.getOne);
 
 //Edit/Update request
 router.put("/request/:id", request.update);

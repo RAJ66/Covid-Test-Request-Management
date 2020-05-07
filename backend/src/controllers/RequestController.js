@@ -36,7 +36,7 @@ requestController.getAll = async function (req, res) {
 
 requestController.getOne = async function (req, res) {
   const { id } = req.params;
-  const request = await Request.find({ id: id });
+  const request = await Request.findById(id);
   res.json({ request });
 };
 

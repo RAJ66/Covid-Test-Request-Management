@@ -2,12 +2,13 @@ const mongoose = require("mongoose");
 
 const RequestSchema = new mongoose.Schema({
   id: String,
-  saude24: { type: String, default: "No" },
-  riskGroup: { type: String, default: "No" },
-  riskProfession: { type: String, default: "No" },
+  saude24: { type: String, required: true },
+  riskGroup: { type: String, required: true },
+  riskProfession: { type: String, required: true },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   employeeId: {
     type: mongoose.Schema.Types.ObjectId,

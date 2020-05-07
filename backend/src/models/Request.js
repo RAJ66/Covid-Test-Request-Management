@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const RequestSchema = new mongoose.Schema({
   id: String,
   saude24: { type: String, default: "No" },
-  riscGroup: { type: String, default: "No" },
-  riscProfession: { type: String, default: "No" },
+  riskGroup: { type: String, default: "No" },
+  riskProfession: { type: String, default: "No" },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

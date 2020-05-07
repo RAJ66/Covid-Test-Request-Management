@@ -11,11 +11,11 @@ requestController.getAll = async function (req, res) {
     if (req.query.saude24) {
       filters.saude24 = req.query.saude24;
     }
-    if (req.query.riscProfession) {
-      filters.riscProfession = req.query.riscProfession;
+    if (req.query.riskProfession) {
+      filters.riskProfession = req.query.riskProfession;
     }
     if (req.query.riscGroup) {
-      filters.riscGroup = req.query.riscGroup;
+      filters.riskGroup = req.query.riskGroup;
     }
     if (req.query.userId) {
       filters.userId = req.query.userId;

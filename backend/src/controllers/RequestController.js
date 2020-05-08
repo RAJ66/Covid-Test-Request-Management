@@ -14,7 +14,7 @@ requestController.getAll = async function (req, res) {
     if (req.query.riskProfession) {
       filters.riskProfession = req.query.riskProfession;
     }
-    if (req.query.riscGroup) {
+    if (req.query.riskGroup) {
       filters.riskGroup = req.query.riskGroup;
     }
     if (req.query.userId) {

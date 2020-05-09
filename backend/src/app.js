@@ -4,7 +4,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-
+const cors = require("cors");
 //Routes
 const indexRouter = require("./routes/index");
 
@@ -19,6 +19,7 @@ mongoose
   .catch((err) => console.error(err));
 
 const app = express();
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -29,7 +30,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/apiv1", indexRouter);
+app.use(`/api${process.env.VERSION_API}`, indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

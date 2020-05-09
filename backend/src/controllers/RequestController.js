@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
+
 const Request = require("../models/Request");
+
+moment.locale("pt");
 
 const generateUniqueId = require("../utils/generateUniqueId");
 
@@ -30,7 +34,7 @@ requestController.getAll = async function (req, res) {
     const requestList = await Request.find(filters);
     res.json({ requestList });
   } catch (e) {
-    res.json({});
+    res.json({ err: e });
   }
 };
 
@@ -91,13 +95,15 @@ requestController.create = async function (req, res) {
       }
     }
   } catch (e) {
-    res.json({});
+    res.json({ err: e });
   }
 };
 
 requestController.update = async function (req, res) {
   try {
     const { id } = req.params;
+
+    const testDate = moment().format();
 
     const userInfected = "Infected";
     const userNotInfected = "Not Infected";
@@ -113,6 +119,10 @@ requestController.update = async function (req, res) {
 
     const request = await Request.findById(id);
 
+    if (request.firstTestDate === undefined) {
+      await Request.findByIdAndUpdate();
+    }
+
     if (
       request.firstTestResult == testResultPending &&
       request.secondTestResult != testResultPending
@@ -120,31 +130,71 @@ requestController.update = async function (req, res) {
       await Request.findByIdAndUpdate(id, {
         secondTestResult: testResultPending,
       });
+
       res.json({});
     } else if (
       request.firstTestResult == testResultPositive ||
       request.secondTestResult == testResultPositive
     ) {
-      await Request.findByIdAndUpdate(id, {
-        userState: userInfected,
-        requestState: requestDone,
-      });
-      const updatedRequest = await Request.findById(id);
-      res.json({ updatedRequest });
+      if (request.secondTestResult == testResultPending) {
+        await Request.findByIdAndUpdate(id, {
+          userState: userInfected,
+          requestState: requestDone,
+          firstTestDate: testDate,
+        });
+
+        const updatedRequest = await Request.findById(id);
+        res.json({ updatedRequest });
+      } else {
+        const secondDateLimit = moment(request.firstTestDate)
+          .add(2, "days")
+          .format();
+        const isValid = moment(testDate).isAfter(secondDateLimit);
+
+        if (isValid) {
+          await Request.findByIdAndUpdate(id, {
+            userState: userInfected,
+            requestState: requestDone,
+            secondTestDate: testDate,
+          });
+        } else {
+          await Request.findByIdAndUpdate(id, {
+            secondTestResult: testResultPending,
+          });
+        }
+
+        const updatedRequest = await Request.findById(id);
+        res.json({ updatedRequest });
+      }
     } else if (
       request.firstTestResult == testResultNegative &&
       request.secondTestResult == testResultNegative
     ) {
-      await Request.findByIdAndUpdate(id, {
-        userState: userNotInfected,
-        requestState: requestDone,
-      });
+      const secondDateLimit = moment(request.firstTestDate)
+        .add(2, "days")
+        .format();
+      const isValid = moment(testDate).isAfter(secondDateLimit);
+
+      if (isValid) {
+        await Request.findByIdAndUpdate(id, {
+          userState: userNotInfected,
+          requestState: requestDone,
+          secondTestDate: testDate,
+        });
+      } else {
+        await Request.findByIdAndUpdate(id, {
+          secondTestResult: testResultPending,
+        });
+      }
+
       const updatedRequest = await Request.findById(id);
       res.json({ updatedRequest });
     } else if (request.secondTestResult == testResultPending) {
       await Request.findByIdAndUpdate(id, {
         requestState: requestInProgress,
+        firstTestDate: testDate,
       });
+
       const updatedRequest = await Request.findById(id);
       res.json({ updatedRequest });
     }

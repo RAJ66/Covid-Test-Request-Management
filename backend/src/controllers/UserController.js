@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 var userController = {};
 
@@ -20,6 +21,13 @@ userController.getOne = async function (req, res) {
 
 userController.create = async function (req, res) {
   try {
+    const password = req.body.password;
+    const passwordHash = await bcrypt.hashSync(
+      password,
+      bcrypt.genSaltSync(10)
+    );
+    req.body.password = passwordHash;
+
     const result = await User.create(req.body);
     res.json({ result });
   } catch (e) {

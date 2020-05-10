@@ -8,16 +8,14 @@ dashBoardController.list = async function (req, res) {
     const requestTotal = await Request.find().count();
 
     const requestTotalNeg = await Request.find({
-      testResult: "Negativo",
+      userState: "Not Infected",
     }).count();
 
     const requestTotalPos = await Request.find({
-      testResult: "Positivo",
+      userState: "Infected",
     }).count();
 
-    const requestTotalUn = await Request.find({
-      testResult: undefined,
-    }).count();
+    const requestTotalUn = requestTotal - requestTotalNeg - requestTotalNeg;
 
     res.json({
       requestTotal,
@@ -26,7 +24,7 @@ dashBoardController.list = async function (req, res) {
       requestTotalUn,
     });
   } catch (e) {
-    res.json({});
+    res.json({ err: e });
   }
 };
 

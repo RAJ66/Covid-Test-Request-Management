@@ -9,9 +9,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './header/header.component';
+import { RequestComponent } from './request/request.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, RequestComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

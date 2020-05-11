@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   neg = 0;
   pos = 0;
   def = 0;
+  list = [];
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +25,12 @@ export class AppComponent implements OnInit {
         this.pos = res.requestTotalPos;
         this.def = res.requestTotalUn;
         console.log(res);
+      });
+
+    this.http
+      .get('http://localhost:3333/apiv1/requests')
+      .subscribe((res: any) => {
+        this.list = res.requestList;
       });
   }
 }

@@ -1,14 +1,13 @@
-<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+<app-header></app-header>
 
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
+<h1>List Request Example</h1>
+<div *ngFor="let item of list">
+  <app-request [item]="item"></app-request>
+</div>
 
-<small>{{ total }}</small>
+<h1>Dashboard</h1>
 <img
-  src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Negative','Positive', 'Em espera'], datasets:[{data:[{{
+  src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Infected','Not Infected', 'Suspect'], datasets:[{data:[{{
     neg
   }},{{ pos }},{{ def }}]}]}}"
 />
@@ -19,5 +18,12 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<h1>Test Material UI</h1>
+<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
 
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu>
 <router-outlet></router-outlet>

@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   name: String,
   birthDate: Date,
   contact: Number,
+  role: { type: String, required: true },
   updated_at: { type: Date, default: Date.now },
 });
 

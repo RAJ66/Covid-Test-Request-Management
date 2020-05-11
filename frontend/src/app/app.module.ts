@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './header/header.component';
 import { RequestComponent } from './request/request.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, RequestComponent],
@@ -21,6 +22,7 @@ import { RequestComponent } from './request/request.component';
     MatSliderModule,
     MatMenuModule,
     MatButtonModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

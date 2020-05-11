@@ -3,8 +3,6 @@ const moment = require("moment");
 
 const Request = require("../models/Request");
 
-moment.locale("pt");
-
 const generateUniqueId = require("../utils/generateUniqueId");
 
 const requestController = {};
@@ -103,8 +101,6 @@ requestController.update = async function (req, res) {
   try {
     const { id } = req.params;
 
-    const testDate = moment().format();
-
     const userInfected = "Infected";
     const userNotInfected = "Not Infected";
 
@@ -119,16 +115,15 @@ requestController.update = async function (req, res) {
 
     const request = await Request.findById(id);
 
-    if (request.firstTestDate === undefined) {
-      await Request.findByIdAndUpdate();
-    }
-
     if (
-      request.firstTestResult == testResultPending &&
-      request.secondTestResult != testResultPending
+      (request.firstTestResult == testResultPending &&
+        request.secondTestResult != testResultPending) ||
+      (request.firstTestDate == undefined &&
+        request.secondTestDate != undefined)
     ) {
       await Request.findByIdAndUpdate(id, {
         secondTestResult: testResultPending,
+        secondTestDate: undefined,
       });
 
       res.json({});
@@ -136,64 +131,41 @@ requestController.update = async function (req, res) {
       request.firstTestResult == testResultPositive ||
       request.secondTestResult == testResultPositive
     ) {
-      if (request.secondTestResult == testResultPending) {
-        await Request.findByIdAndUpdate(id, {
-          userState: userInfected,
-          requestState: requestDone,
-          firstTestDate: testDate,
-        });
+      await Request.findByIdAndUpdate(id, {
+        userState: userInfected,
+        requestState: requestDone,
+      });
 
-        const updatedRequest = await Request.findById(id);
-        res.json({ updatedRequest });
-      } else {
-        const secondDateLimit = moment(request.firstTestDate)
-          .add(2, "days")
-          .format();
-        const isValid = moment(testDate).isAfter(secondDateLimit);
-
-        if (isValid) {
-          await Request.findByIdAndUpdate(id, {
-            userState: userInfected,
-            requestState: requestDone,
-            secondTestDate: testDate,
-          });
-        } else {
-          await Request.findByIdAndUpdate(id, {
-            secondTestResult: testResultPending,
-          });
-        }
-
-        const updatedRequest = await Request.findById(id);
-        res.json({ updatedRequest });
-      }
+      const updatedRequest = await Request.findById(id);
+      res.json({ updatedRequest });
     } else if (
       request.firstTestResult == testResultNegative &&
       request.secondTestResult == testResultNegative
     ) {
-      const secondDateLimit = moment(request.firstTestDate)
-        .add(2, "days")
-        .format();
-      const isValid = moment(testDate).isAfter(secondDateLimit);
-
-      if (isValid) {
-        await Request.findByIdAndUpdate(id, {
-          userState: userNotInfected,
-          requestState: requestDone,
-          secondTestDate: testDate,
-        });
-      } else {
-        await Request.findByIdAndUpdate(id, {
-          secondTestResult: testResultPending,
-        });
-      }
+      await Request.findByIdAndUpdate(id, {
+        userState: userNotInfected,
+        requestState: requestDone,
+      });
 
       const updatedRequest = await Request.findById(id);
       res.json({ updatedRequest });
     } else if (request.secondTestResult == testResultPending) {
-      await Request.findByIdAndUpdate(id, {
-        requestState: requestInProgress,
-        firstTestDate: testDate,
-      });
+      console.log("Africa");
+      if (request.firstTestResult == testResultNegative) {
+        console.log("America");
+        const secondDate = moment(request.firstTestDate)
+          .add(2, "days")
+          .format();
+
+        await Request.findByIdAndUpdate(id, {
+          requestState: requestInProgress,
+          secondTestDate: secondDate,
+        });
+      } else {
+        await Request.findByIdAndUpdate(id, {
+          requestState: requestInProgress,
+        });
+      }
 
       const updatedRequest = await Request.findById(id);
       res.json({ updatedRequest });

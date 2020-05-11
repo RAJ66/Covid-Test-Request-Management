@@ -12,7 +12,7 @@ const RequestSchema = new mongoose.Schema({
   },
   employeeId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Employee",
+    ref: "User",
     default: undefined,
   },
   firstTestResult: { type: String, default: "Pending" },

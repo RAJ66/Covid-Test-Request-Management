@@ -150,9 +150,7 @@ requestController.update = async function (req, res) {
       const updatedRequest = await Request.findById(id);
       res.json({ updatedRequest });
     } else if (request.secondTestResult == testResultPending) {
-      console.log("Africa");
       if (request.firstTestResult == testResultNegative) {
-        console.log("America");
         const secondDate = moment(request.firstTestDate)
           .add(2, "days")
           .format();

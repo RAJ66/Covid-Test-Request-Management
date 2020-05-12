@@ -11,9 +11,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './header/header.component';
 import { RequestComponent } from './request/request.component';
 import { MatTableModule } from '@angular/material/table';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, RequestComponent],
+  declarations: [AppComponent, HeaderComponent, RequestComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

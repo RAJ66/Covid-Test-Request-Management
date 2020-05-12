@@ -5,12 +5,8 @@
   <app-request [item]="item"></app-request>
 </div>
 
-<h1>Dashboard</h1>
-<img
-  src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Infected','Not Infected', 'Suspect'], datasets:[{data:[{{
-    neg
-  }},{{ pos }},{{ def }}]}]}}"
-/>
+<app-dashboard></app-dashboard>
+
 <h2>Test table resquest</h2>
 <table mat-table [dataSource]="list" class="mat-elevation-z8">
   <!--- Note that these columns can be defined in any order.

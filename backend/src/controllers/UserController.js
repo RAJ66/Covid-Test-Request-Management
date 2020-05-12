@@ -6,7 +6,13 @@ var userController = {};
 
 userController.getAll = async function (req, res) {
   try {
-    const userList = await User.find();
+    const filters = {};
+
+    if (req.query.role) {
+      filters.role = req.query.role;
+    }
+
+    const userList = await User.find(filters);
     res.json({ userList });
   } catch (e) {
     res.json({});

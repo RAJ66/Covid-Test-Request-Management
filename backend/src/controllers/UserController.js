@@ -27,15 +27,21 @@ userController.getOne = async function (req, res) {
 
 userController.create = async function (req, res) {
   try {
-    const password = req.body.password;
-    const passwordHash = await bcrypt.hashSync(
-      password,
-      bcrypt.genSaltSync(10)
-    );
-    req.body.password = passwordHash;
+    const userDB = await User.findOne({ nif: req.body.nif });
 
-    const result = await User.create(req.body);
-    res.json({ result });
+    if (userDB) {
+      res.json({});
+    } else {
+      const password = req.body.password;
+      const passwordHash = await bcrypt.hashSync(
+        password,
+        bcrypt.genSaltSync(10)
+      );
+      req.body.password = passwordHash;
+
+      const result = await User.create(req.body);
+      res.json({ result });
+    }
   } catch (e) {
     res.json({});
   }

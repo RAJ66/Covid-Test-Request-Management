@@ -19,9 +19,13 @@ sessionController.login = async function (req, res) {
   if (userDB) {
     bcrypt.compare(user.password, userDB.password, function (err, result) {
       if (result) {
-        const token = jwt.sign({ nif: user.nif }, JWT_SECRET, {
-          expiresIn: SESSION_EXPIRATION,
-        });
+        const token = jwt.sign(
+          { nif: user.nif, role: userDB.role },
+          JWT_SECRET,
+          {
+            expiresIn: SESSION_EXPIRATION,
+          }
+        );
         res.cookie("x-authentication", token, {
           expires: new Date(Date.now() + SESSION_EXPIRATION),
           secure: false, // set to true if your using https
@@ -40,10 +44,8 @@ sessionController.login = async function (req, res) {
 
 sessionController.me = async function (req, res) {
   try {
-    const token = req.cookies["x-authentication"];
-    if (token) {
-      const user = await decryptToken(token);
-      res.json(user);
+    if (req.user) {
+      res.json(req.user);
     } else {
       res.status(401);
       res.json(null);

@@ -14,9 +14,10 @@ import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListRequestComponent } from './list-request/list-request.component';
 import { TableRequestComponent } from './table-request/table-request.component';
+import { TestMaterialComponent } from './test-material/test-material.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, RequestComponent, DashboardComponent, ListRequestComponent, TableRequestComponent],
+  declarations: [AppComponent, HeaderComponent, RequestComponent, DashboardComponent, ListRequestComponent, TableRequestComponent, TestMaterialComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

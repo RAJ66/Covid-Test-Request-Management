@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-table-request',
@@ -13,7 +13,12 @@ export class TableRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('http://localhost:3333/apiv1/requests')
+      .get('http://localhost:3333/apiv1/requests', {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        withCredentials: true,
+      })
       .subscribe((res: any) => {
         this.list = res.requestList;
       });

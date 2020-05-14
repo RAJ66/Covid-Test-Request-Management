@@ -5,7 +5,6 @@ const authorize = require("../middleware/authorize");
 
 //Get all information about the request and results
 
-//router.get("/dashboard", authorize(["Admin"]), dashboard.list);
-router.get("/dashboard", dashboard.list);
+router.get("/dashboard", authorize(["Admin"]), dashboard.list);
 
 module.exports = router;

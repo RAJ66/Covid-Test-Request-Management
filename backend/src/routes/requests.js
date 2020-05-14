@@ -4,13 +4,11 @@ const request = require("../controllers/RequestController.js");
 const authorize = require("../middleware/authorize");
 
 //Get all requests
-/*
 router.get(
   "/requests",
   authorize(["Admin", "Employee", "User"]),
   request.getAll
-);*/
-router.get("/requests", request.getAll);
+);
 
 //Save request
 router.post("/requests", authorize(["User"]), request.create);

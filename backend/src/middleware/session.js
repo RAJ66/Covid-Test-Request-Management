@@ -4,6 +4,7 @@ const { JWT_SECRET = "this is for development" } = process.env;
 
 const sessionMiddleware = (req, res, next) => {
   const sessionStr = req.cookies["x-authentication"];
+
   try {
     if (sessionStr) {
       const user = jwt.verify(sessionStr, JWT_SECRET);

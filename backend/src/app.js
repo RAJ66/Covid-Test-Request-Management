@@ -1,10 +1,14 @@
 require("dotenv").config();
+
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const sessionMiddleware = require("./middleware/session");
+
 //Routes
 const indexRouter = require("./routes/index");
 
@@ -24,11 +28,12 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "public")));
+
+// Setup session middleware
+app.use(sessionMiddleware);
 
 app.use(`/api${process.env.VERSION_API}`, indexRouter);
 

@@ -6,7 +6,7 @@
     "title": "Testes API"
   },
   "host": "localhost:3333",
-  "basePath": "/api/v1",
+  "basePath": "/apiv1",
   "tags": [
     {
       "name": "User",

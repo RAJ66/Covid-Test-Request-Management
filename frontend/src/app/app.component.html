@@ -1,23 +1,9 @@
-<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+<app-header></app-header>
 
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
-
-<small>{{ total }}</small>
-<img
-  src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Negative','Positive', 'Em espera'], datasets:[{data:[{{
-    neg
-  }},{{ pos }},{{ def }}]}]}}"
-/>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
+<nav>
+  <a routerLink="/list/">List</a>
+  <a routerLink="/table/">Table</a>
+  <a routerLink="/dashboard/">Dashboard</a>
+  <a routerLink="/material/">Material</a>
+</nav>
 <router-outlet></router-outlet>

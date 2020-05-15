@@ -1,10 +1,14 @@
 require("dotenv").config();
+
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const sessionMiddleware = require("./middleware/session");
+
 //Routes
 const indexRouter = require("./routes/index");
 
@@ -22,19 +26,26 @@ mongoose
   .catch((err) => console.error(err));
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:4200",
+  })
+);
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
+// Setup session middleware
+app.use(sessionMiddleware);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(`/api${process.env.VERSION_API}`, indexRouter);
 
 // catch 404 and forward to error handler

@@ -11,6 +11,9 @@ const indexRouter = require("./routes/index");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
+
 mongoose
   .connect(`mongodb://localhost/${process.env.DATABASE}`, {
     useNewUrlParser: true,
@@ -24,6 +27,9 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/v1", indexRouter);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

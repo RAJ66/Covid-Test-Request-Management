@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API with Users and Requests entities",
+    "version": "1.0.0",
+    "title": "Testes API"
+  },
+  "host": "localhost:3333",
+  "basePath": "/apiv1",
+  "tags": [
+    {
+      "name": "User",
+      "description": "API for users"
+    },
+    {
+      "name": "Request",
+      "description": "API for requests"
+    },
+    {
+      "name": "Dashboard",
+      "description": "API for dashboard"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with given ID",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/requests": {
+      "post": {
+        "tags": ["Request"],
+        "summary": "Create new request in system",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New request is created",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Request"],
+        "summary": "Get all requests in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Requests"
+            }
+          }
+        }
+      }
+    },
+    "/request/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of request that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Request"],
+        "summary": "Get request with given ID",
+        "responses": {
+          "200": {
+            "description": "Request is found",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete request with given ID",
+        "tags": ["Request"],
+        "responses": {
+          "200": {
+            "description": "Request is deleted",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update request with given ID",
+        "tags": ["Request"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Product with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Requests"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is updated",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        }
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "tags": ["Dashboard"],
+        "summary": "Get all information about the request and results",
+        "responses": {
+          "200": {}
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["role", "_id"],
+      "properties": {
+        "nif": {
+          "type": "number"
+        },
+        "password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "contact": {
+          "type": "number"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "$ref": "#/definitions/User"
+    },
+    "Request": {
+      "required": ["riskGroup", "riskProfession", "saude24", "userId"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "saude24": {
+          "type": "boolean"
+        },
+        "riskGroup": {
+          "type": "boolean"
+        },
+        "riskProfession": {
+          "type": "boolean"
+        },
+        "userId": {
+          "type": "string",
+          "$ref": "#/definitions/User/id"
+        },
+        "employeeId": {
+          "type": "string",
+          "$ref": "#/definitions/User/id"
+        },
+        "firstTestResult": {
+          "type": "string"
+        },
+        "firstTestDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "secondTestResult": {
+          "type": "string"
+        },
+        "secondTestDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "requestState": {
+          "type": "string"
+        },
+        "userState": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string",
+          "default": "undefined"
+        }
+      }
+    },
+    "Requests": {
+      "$ref": "#/definitions/Request"
+    }
+  }
+}

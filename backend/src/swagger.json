@@ -19,40 +19,21 @@
     {
       "name": "Dashboard",
       "description": "API for dashboard"
+    },
+    {
+      "name": "Session",
+      "description": "API for session"
     }
   ],
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
-
   "paths": {
     "/users": {
-      "post": {
-        "tags": ["User"],
-        "summary": "Create new user in system",
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User that we want to create",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "New user is created",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        }
-      },
       "get": {
         "tags": ["User"],
         "summary": "Get all users in system",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -61,21 +42,45 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Create new user in system",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "User that we want to create",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
       }
     },
     "/user/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "ID of user that we want to find",
-          "type": "string"
-        }
-      ],
       "get": {
         "tags": ["User"],
         "summary": "Get user with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user that we want to find",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "User is found",
@@ -85,26 +90,22 @@
           }
         }
       },
-      "delete": {
-        "summary": "Delete user with given ID",
-        "tags": ["User"],
-        "responses": {
-          "200": {
-            "description": "User is deleted",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        }
-      },
       "put": {
-        "summary": "Update user with given ID",
         "tags": ["User"],
+        "summary": "Update user with given ID",
         "parameters": [
           {
-            "name": "user",
+            "name": "id",
+            "in": "path",
+            "description": "ID of user that we want to find",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
+            "name": "user",
             "description": "User with new values of properties",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Users"
             }
@@ -118,35 +119,34 @@
             }
           }
         }
-      }
-    },
-    "/requests": {
-      "post": {
-        "tags": ["Request"],
-        "summary": "Create new request in system",
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete user with given ID",
         "parameters": [
           {
-            "name": "request",
-            "in": "body",
-            "description": "Request that we want to create",
-            "schema": {
-              "$ref": "#/definitions/Request"
-            }
+            "name": "id",
+            "in": "path",
+            "description": "ID of user that we want to find",
+            "required": true,
+            "type": "string"
           }
         ],
-        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "New request is created",
+            "description": "User is deleted",
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/User"
             }
           }
         }
-      },
+      }
+    },
+    "/requests": {
       "get": {
         "tags": ["Request"],
         "summary": "Get all requests in system",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -155,21 +155,45 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": ["Request"],
+        "summary": "Create new request in system",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request that we want to create",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New request is created",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        }
       }
     },
     "/request/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "ID of request that we want to find",
-          "type": "string"
-        }
-      ],
       "get": {
         "tags": ["Request"],
         "summary": "Get request with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of request that we want to find",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Request is found",
@@ -179,26 +203,22 @@
           }
         }
       },
-      "delete": {
-        "summary": "Delete request with given ID",
-        "tags": ["Request"],
-        "responses": {
-          "200": {
-            "description": "Request is deleted",
-            "schema": {
-              "$ref": "#/definitions/Request"
-            }
-          }
-        }
-      },
       "put": {
-        "summary": "Update request with given ID",
         "tags": ["Request"],
+        "summary": "Update request with given ID",
         "parameters": [
           {
-            "name": "request",
+            "name": "id",
+            "in": "path",
+            "description": "ID of request that we want to find",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
+            "name": "request",
             "description": "Product with new values of properties",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Requests"
             }
@@ -212,21 +232,95 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["Request"],
+        "summary": "Delete request with given ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of request that we want to find",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is deleted",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        }
       }
     },
     "/dashboard": {
       "get": {
         "tags": ["Dashboard"],
         "summary": "Get all information about the request and results",
+        "parameters": [],
         "responses": {
           "200": {}
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Session"],
+        "summary": "User login",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "loginRequest",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login"
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "tags": ["Session"],
+        "summary": "Information of the login user",
+        "parameters": [],
+        "responses": {
+          "200": {}
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": ["Session"],
+        "summary": "User logout",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "User that we want to create",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created"
+          }
         }
       }
     }
   },
   "definitions": {
     "User": {
-      "required": ["role", "_id"],
+      "required": ["role"],
       "properties": {
         "nif": {
           "type": "number"
@@ -271,11 +365,9 @@
           "type": "boolean"
         },
         "userId": {
-          "type": "string",
           "$ref": "#/definitions/User/id"
         },
         "employeeId": {
-          "type": "string",
           "$ref": "#/definitions/User/id"
         },
         "firstTestResult": {
@@ -306,6 +398,17 @@
     },
     "Requests": {
       "$ref": "#/definitions/Request"
+    },
+    "LoginRequest": {
+      "required": ["nif", "password"],
+      "properties": {
+        "nif": {
+          "type": "number"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
     }
   }
 }

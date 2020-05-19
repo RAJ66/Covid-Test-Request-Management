@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-  withCredentials: true,
-};
+import { SessionService } from '../services/session.service';
 
 const AdminUserTest = {
-  nif: 100000010,
+  nif: 100000012,
   password: 'password',
 };
 
@@ -19,13 +12,13 @@ const AdminUserTest = {
   styleUrls: ['./test-material.component.css'],
 })
 export class TestMaterialComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  errors: String;
+
+  constructor(public session: SessionService) {}
 
   ngOnInit(): void {
-    this.http
-      .post('http://localhost:3333/apiv1/login', AdminUserTest, httpOptions)
-      .subscribe((res: any) => {
-        console.log(res);
-      });
+    const request = this.session
+      .login(AdminUserTest.nif, AdminUserTest.password)
+      .subscribe();
   }
 }

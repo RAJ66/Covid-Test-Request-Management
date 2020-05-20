@@ -22,15 +22,15 @@ export class UsersService {
     return this.http.get(`${API_URL}users`, httpOptions);
   }
 
-  createUser(user: Object): Observable<any> {
+  createUser(user: object): Observable<any> {
     return this.http.post(`${API_URL}users`, user, httpOptions);
   }
 
-  getOneUser(userId): Observable<any> {
+  getOneUser(userId: string): Observable<any> {
     return this.http.get(`${API_URL}user/${userId}`, httpOptions);
   }
 
-  updateUser(userId, newInformation): Observable<any> {
+  updateUser(userId: string, newInformation: object): Observable<any> {
     return this.http.put(
       `${API_URL}user/${userId}`,
       newInformation,
@@ -38,7 +38,7 @@ export class UsersService {
     );
   }
 
-  deleteUser(userId): Observable<any> {
+  deleteUser(userId: string): Observable<any> {
     return this.http.delete(`${API_URL}user/${userId}`, httpOptions);
   }
 }

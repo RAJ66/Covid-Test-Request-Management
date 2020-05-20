@@ -22,15 +22,15 @@ export class RequestsService {
     return this.http.get(`${API_URL}requests`, httpOptions);
   }
 
-  createRequest(request: Object): Observable<any> {
+  createRequest(request: object): Observable<any> {
     return this.http.post(`${API_URL}requests`, request, httpOptions);
   }
 
-  getOneRequest(requestId): Observable<any> {
+  getOneRequest(requestId: string): Observable<any> {
     return this.http.get(`${API_URL}request/${requestId}`, httpOptions);
   }
 
-  updateRequest(requestId, newInformation): Observable<any> {
+  updateRequest(requestId: string, newInformation: object): Observable<any> {
     return this.http.put(
       `${API_URL}request/${requestId}`,
       newInformation,
@@ -38,7 +38,7 @@ export class RequestsService {
     );
   }
 
-  deleteRequest(requestId): Observable<any> {
+  deleteRequest(requestId: string): Observable<any> {
     return this.http.delete(`${API_URL}request/${requestId}`, httpOptions);
   }
 }

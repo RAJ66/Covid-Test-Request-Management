@@ -37,7 +37,11 @@ export class SessionService {
     );
   }
 
-  me() {}
+  me(): Observable<any> {
+    return this.http.get(`${API_URL}me`, httpOptions);
+  }
 
-  logout() {}
+  logout(): Observable<any> {
+    return this.http.post(`${API_URL}logout`, httpOptions);
+  }
 }

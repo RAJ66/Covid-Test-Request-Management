@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session.service';
 
 const AdminUserTest = {
-  nif: 100000012,
+  nif: 100000010,
   password: 'password',
 };
 

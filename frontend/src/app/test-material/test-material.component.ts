@@ -17,10 +17,7 @@ export class TestMaterialComponent implements OnInit {
   constructor(public session: SessionService) {}
 
   ngOnInit(): void {
-    const request = this.session
-      .login(AdminUserTest.nif, AdminUserTest.password)
-      .subscribe();
+    this.session.login(AdminUserTest.nif, AdminUserTest.password).subscribe();
     this.session.me().subscribe();
-    this.session.logout().subscribe();
   }
 }

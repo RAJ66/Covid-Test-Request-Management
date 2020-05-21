@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RequestsService } from '../services/requests.service';
 
 @Component({
   selector: 'app-list-request',
@@ -8,18 +8,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ListRequestComponent implements OnInit {
   list = [];
-  constructor(private http: HttpClient) {}
+  constructor(public requests: RequestsService) {}
 
   ngOnInit(): void {
-    this.http
-      .get('http://localhost:3333/apiv1/requests', {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-        withCredentials: true,
-      })
-      .subscribe((res: any) => {
-        this.list = res.requestList;
-      });
+    this.requests.getRequests().subscribe((res: any) => {
+      this.list = res.requestList;
+    });
   }
 }

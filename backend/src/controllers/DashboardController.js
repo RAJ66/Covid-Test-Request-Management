@@ -15,7 +15,7 @@ dashBoardController.list = async function (req, res) {
       userState: "Infected",
     }).count();
 
-    const requestTotalUn = requestTotal - requestTotalNeg - requestTotalNeg;
+    const requestTotalUn = requestTotal - requestTotalPos - requestTotalNeg;
 
     res.json({
       requestTotal,

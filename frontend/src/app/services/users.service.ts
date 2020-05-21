@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:3333/apiv1/';
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-  withCredentials: true,
-};
+import { API_URL, httpOptions } from './setup';
 
 @Injectable({
   providedIn: 'root',

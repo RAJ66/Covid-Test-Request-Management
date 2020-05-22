@@ -4,7 +4,10 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { API_URL, httpOptions } from './setup';
+import { environment } from './../../environments/environment';
+
+const API_URL = environment.apiUrl;
+const httpOptions = environment.headers;
 
 @Injectable({
   providedIn: 'root',

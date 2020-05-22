@@ -28,11 +28,11 @@ mongoose
     console.log("mongo connection succesful");
     const adminUser = await User.findOne({ role: "Admin" });
     if (!adminUser) {
-      console.log("creating admin user");
+      console.log("creating admin user!");
       const adminUser = await new User({
-        nif: 11,
-        password: "11",
-        role: "ADMIN",
+        nif: process.env.NIF_ADMIN,
+        password: process.env.PASS_ADMIN,
+        role: "Admin",
       })
         .save()
         .catch(console.error);

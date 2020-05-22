@@ -7,6 +7,12 @@ const sessionRouter = require("./session");
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.json({
+    status: "OK",
+  });
+});
+
 router.use("/", usersRouter);
 router.use("/", requestRouter);
 router.use("/", dashboardRouter);

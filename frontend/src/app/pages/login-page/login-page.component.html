@@ -1,9 +1,14 @@
 <div class="login-container">
   <section class="form">
-    <form>
+    <form (submit)="handleSubmit($event)">
       <h1>Login</h1>
-      <input type="text" placeholder="NIF" />
-      <input type="password" placeholder="Password" />
+      <input [(ngModel)]="nif" name="nif" type="text" placeholder="NIF" />
+      <input
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        placeholder="Password"
+      />
       <button type="submit" class="button">
         Enter
       </button>

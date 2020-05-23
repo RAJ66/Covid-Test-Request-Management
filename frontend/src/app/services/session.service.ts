@@ -20,7 +20,7 @@ export class SessionService {
   constructor(public http: HttpClient) {}
 
   login(nif: number, password: string): Observable<any> {
-    return this.http.post(
+    const request = this.http.post(
       `${API_URL}login`,
       {
         nif,
@@ -28,6 +28,13 @@ export class SessionService {
       },
       httpOptions
     );
+
+    request.subscribe((res: any) => {
+      const user = res.userLogged;
+      localStorage.setItem('user', JSON.stringify(user));
+    });
+
+    return request;
   }
 
   me(): Observable<any> {
@@ -35,6 +42,7 @@ export class SessionService {
   }
 
   logout(): Observable<any> {
+    localStorage.removeItem('user');
     return this.http.post(`${API_URL}logout`, httpOptions);
   }
 }

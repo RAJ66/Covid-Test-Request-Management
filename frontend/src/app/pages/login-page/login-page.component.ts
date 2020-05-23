@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../services/session.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -9,14 +10,28 @@ import { SessionService } from '../../services/session.service';
 export class LoginPageComponent implements OnInit {
   nif: number;
   password: string;
+  user;
 
-  constructor(public session: SessionService) {}
+  constructor(
+    public session: SessionService,
+    public router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {}
 
   handleSubmit(event): void {
-    console.log(this.nif, this.password);
     event.preventDefault();
-    this.session.login(this.nif, this.password).subscribe();
+    this.session.login(this.nif, this.password).subscribe(() => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      console.log(user.role);
+      if (user.role === 'Admin') {
+        this.router.navigate(['dashboard']);
+      } else if (user.role === 'Employee') {
+        this.router.navigate(['table']);
+      } else {
+        this.router.navigate(['/']);
+      }
+    });
   }
 }

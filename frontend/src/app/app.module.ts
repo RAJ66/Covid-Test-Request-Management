@@ -17,6 +17,8 @@ import { TableRequestComponent } from './table-request/table-request.component';
 import { TestMaterialComponent } from './test-material/test-material.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
+import { KpiComponent } from './components/kpi/kpi.component';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     TableRequestComponent,
     TestMaterialComponent,
     LoginPageComponent,
+    KpiComponent,
   ],
   imports: [
     BrowserModule,

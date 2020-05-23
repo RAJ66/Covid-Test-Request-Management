@@ -18,11 +18,31 @@ mongoose.Promise = global.Promise;
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
+const User = require("./models/User");
+
 mongoose
   .connect(`mongodb://localhost/${process.env.DATABASE}`, {
     useNewUrlParser: true,
   })
-  .then(() => console.log("mongo connection succesful"))
+  .then(async () => {
+    console.log("mongo connection succesful");
+    const adminUser = await User.findOne({ role: "Admin" });
+    if (!adminUser) {
+      console.log("creating admin user!");
+      const adminUser = await new User({
+        nif: process.env.NIF_ADMIN,
+        password: process.env.PASS_ADMIN,
+        role: "Admin",
+      })
+        .save()
+        .catch(console.error);
+
+      if (adminUser) {
+        console.log("Admin created");
+        console.table([adminUser.toJSON()]);
+      }
+    }
+  })
   .catch((err) => console.error(err));
 
 const app = express();
@@ -38,7 +58,6 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
 
 app.use(express.static(path.join(__dirname, "public")));
 

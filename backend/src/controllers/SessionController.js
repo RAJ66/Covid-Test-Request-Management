@@ -32,7 +32,9 @@ sessionController.login = async function (req, res) {
           httpOnly: true,
         });
 
-        res.send("login");
+        const userLogged = { nif: userDB.nif, role: userDB.role };
+        //res.send("login");
+        res.json({ userLogged });
       } else {
         res.send("Incorrect");
       }

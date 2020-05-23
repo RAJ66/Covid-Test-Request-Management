@@ -16,7 +16,9 @@ import { ListRequestComponent } from './list-request/list-request.component';
 import { TableRequestComponent } from './table-request/table-request.component';
 import { TestMaterialComponent } from './test-material/test-material.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { FormsModule } from '@angular/forms';
 import { KpiComponent } from './components/kpi/kpi.component';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { KpiComponent } from './components/kpi/kpi.component';
     MatMenuModule,
     MatButtonModule,
     MatTableModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

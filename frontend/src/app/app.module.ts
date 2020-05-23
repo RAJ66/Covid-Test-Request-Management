@@ -16,9 +16,20 @@ import { ListRequestComponent } from './list-request/list-request.component';
 import { TableRequestComponent } from './table-request/table-request.component';
 import { TestMaterialComponent } from './test-material/test-material.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { KpiComponent } from './components/kpi/kpi.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, RequestComponent, DashboardComponent, ListRequestComponent, TableRequestComponent, TestMaterialComponent, LoginPageComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    RequestComponent,
+    DashboardComponent,
+    ListRequestComponent,
+    TableRequestComponent,
+    TestMaterialComponent,
+    LoginPageComponent,
+    KpiComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

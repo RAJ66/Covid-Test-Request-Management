@@ -13,9 +13,17 @@ export class HeaderComponent implements OnInit {
   constructor(public session: SessionService, public router: Router) {}
 
   ngOnInit(): void {
-    this.user = localStorage.getItem('user');
+    this.user = JSON.parse(localStorage.getItem('user'));
     if (!this.user) {
       this.router.navigate(['/login']);
+    } else {
+      if (this.user.role == 'Admin') {
+        this.router.navigate(['/dashboard']);
+      } else if (this.user.role == 'Employee') {
+        this.router.navigate(['/table']);
+      } else {
+        this.router.navigate(['/']);
+      }
     }
   }
 

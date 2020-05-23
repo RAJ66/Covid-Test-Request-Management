@@ -1,0 +1,33 @@
+<div class="register-container">
+  <div class="content">
+    <section>
+      <img src="{logoImg}" alt="alguma coisa xdo" />
+      <h1>Registration</h1>
+      <p>
+        text xxx
+      </p>
+
+      <button>I have an account</button>
+    </section>
+
+    <form onSubmit="{handleRegister}">
+      <input type="text" placeholder="NIF" />
+      <input type="email" placeholder="E-mail" />
+      <input type="password" placeholder="Password" />
+      <input type="number" placeholder="Contact" />
+      <mat-form-field>
+        <mat-label>Birth Date</mat-label>
+        <input matInput [matDatepicker]="myDatepicker" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="myDatepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+
+      <button className="button" type="submit">
+        Register
+      </button>
+    </form>
+  </div>
+</div>

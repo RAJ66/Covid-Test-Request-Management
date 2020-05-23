@@ -18,7 +18,9 @@ import { TestMaterialComponent } from './test-material/test-material.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
 import { KpiComponent } from './components/kpi/kpi.component';
-
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DemoMaterialModule } from './material-modules';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { KpiComponent } from './components/kpi/kpi.component';
     TestMaterialComponent,
     LoginPageComponent,
     KpiComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,8 @@ import { KpiComponent } from './components/kpi/kpi.component';
     MatButtonModule,
     MatTableModule,
     FormsModule,
+    MatFormFieldModule,
+    DemoMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

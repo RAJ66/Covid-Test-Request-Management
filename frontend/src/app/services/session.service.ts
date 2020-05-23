@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 import { environment } from './../../environments/environment';
 
@@ -20,14 +21,16 @@ export class SessionService {
   constructor(public http: HttpClient) {}
 
   login(nif: number, password: string): Observable<any> {
-    const request = this.http.post(
-      `${API_URL}login`,
-      {
-        nif,
-        password,
-      },
-      httpOptions
-    );
+    const request = this.http
+      .post(
+        `${API_URL}login`,
+        {
+          nif,
+          password,
+        },
+        httpOptions
+      )
+      .pipe(share());
 
     request.subscribe((res: any) => {
       const user = res.userLogged;

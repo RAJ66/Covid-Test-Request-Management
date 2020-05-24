@@ -1,20 +1,25 @@
 <div class="register-container">
   <div class="content">
     <section>
-      <img src="{logoImg}" alt="alguma coisa xdo" />
-      <h1>Registration</h1>
+      <h1>
+        Registration
+        <img
+          src="https://img.icons8.com/ultraviolet/40/000000/select-users.png"
+          alt="Create Users"
+        />
+      </h1>
       <p>
-        text xxx
+        Create a Users Account
       </p>
 
       <button>I have an account</button>
     </section>
 
     <form onSubmit="{handleRegister}">
-      <input type="text" placeholder="NIF" />
-      <input type="email" placeholder="E-mail" />
-      <input type="password" placeholder="Password" />
-      <input type="number" placeholder="Contact" />
+      <input class="input" type="text" placeholder="NIF" />
+      <input class="input" type="email" placeholder="E-mail" />
+      <input class="input" type="password" placeholder="Password" />
+      <input class="input" type="number" placeholder="Contact" />
       <mat-form-field>
         <mat-label>Birth Date</mat-label>
         <input matInput [matDatepicker]="myDatepicker" />
@@ -25,7 +30,7 @@
         <mat-datepicker #myDatepicker></mat-datepicker>
       </mat-form-field>
 
-      <button className="button" type="submit">
+      <button class="button" type="submit">
         Register
       </button>
     </form>

@@ -1,0 +1,38 @@
+<div class="register-container">
+  <div class="content">
+    <section>
+      <h1>
+        Registration
+        <img
+          src="https://img.icons8.com/ultraviolet/40/000000/select-users.png"
+          alt="Create Users"
+        />
+      </h1>
+      <p>
+        Create a Users Account
+      </p>
+
+      <button>I have an account</button>
+    </section>
+
+    <form onSubmit="{handleRegister}">
+      <input class="input" type="text" placeholder="NIF" />
+      <input class="input" type="email" placeholder="E-mail" />
+      <input class="input" type="password" placeholder="Password" />
+      <input class="input" type="number" placeholder="Contact" />
+      <mat-form-field>
+        <mat-label>Birth Date</mat-label>
+        <input matInput [matDatepicker]="myDatepicker" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="myDatepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+
+      <button class="button" type="submit">
+        Register
+      </button>
+    </form>
+  </div>
+</div>

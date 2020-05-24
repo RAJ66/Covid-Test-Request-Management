@@ -6,6 +6,7 @@ import { TableRequestComponent } from './table-request/table-request.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestMaterialComponent } from './test-material/test-material.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
 const routes: Routes = [
   { path: 'list', component: ListRequestComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'material', component: TestMaterialComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'register', component: RegisterPageComponent },
 ];
 
 @NgModule({

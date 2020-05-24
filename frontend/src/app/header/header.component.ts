@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     if (!this.user) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     } else {
       if (this.user.role == 'Admin') {
         this.router.navigate(['/dashboard']);

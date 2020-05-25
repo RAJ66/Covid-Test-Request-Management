@@ -33,13 +33,15 @@ sessionController.login = async function (req, res) {
         });
 
         const userLogged = { nif: userDB.nif, role: userDB.role };
-        //res.send("login");
+
         res.json({ userLogged });
       } else {
+        res.status(401);
         res.send("Incorrect");
       }
     });
   } else {
+    res.status(404);
     res.send("User not exist");
   }
 };

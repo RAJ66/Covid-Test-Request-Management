@@ -20,9 +20,13 @@ userController.getAll = async function (req, res) {
 };
 
 userController.getOne = async function (req, res) {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  res.json({ user });
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.json({ user });
+  } catch (e) {
+    res.status(404);
+  }
 };
 
 userController.create = async function (req, res) {
@@ -30,6 +34,7 @@ userController.create = async function (req, res) {
     const userDB = await User.findOne({ nif: req.body.nif });
 
     if (userDB) {
+      res.status(403);
       res.json({});
     } else {
       const password = req.body.password;
@@ -43,6 +48,7 @@ userController.create = async function (req, res) {
       res.json({ result });
     }
   } catch (e) {
+    res.status(500);
     res.json({});
   }
 };

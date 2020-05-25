@@ -32,6 +32,7 @@ requestController.getAll = async function (req, res) {
     const requestList = await Request.find(filters);
     res.json({ requestList });
   } catch (e) {
+    res.status(500);
     res.json({ err: e });
   }
 };
@@ -93,6 +94,7 @@ requestController.create = async function (req, res) {
       }
     }
   } catch (e) {
+    res.status(500);
     res.json({ err: e });
   }
 };
@@ -169,6 +171,7 @@ requestController.update = async function (req, res) {
       res.json({ updatedRequest });
     }
   } catch (e) {
+    res.status(500);
     res.json({});
   }
 };

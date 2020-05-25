@@ -24,10 +24,14 @@
 .register-container .content section {
   width: 100%;
   max-width: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .register-container .content section h1 {
-  margin: 64px 0 32px;
+  margin: 0 0 32px;
   font-size: 32px;
 }
 

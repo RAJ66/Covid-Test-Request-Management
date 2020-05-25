@@ -15,14 +15,50 @@
       <button>I have an account</button>
     </section>
 
-    <form onSubmit="{handleRegister}">
-      <input class="input" type="text" placeholder="NIF" />
-      <input class="input" type="email" placeholder="E-mail" />
-      <input class="input" type="password" placeholder="Password" />
-      <input class="input" type="number" placeholder="Contact" />
+    <form (submit)="handleRegister($event)">
+      <input
+        [(ngModel)]="nif"
+        name="nif"
+        class="input"
+        type="text"
+        placeholder="NIF"
+      />
+      <input
+        [(ngModel)]="email"
+        name="email"
+        class="input"
+        type="email"
+        placeholder="E-mail"
+      />
+      <input
+        [(ngModel)]="name"
+        name="name"
+        class="input"
+        type="text"
+        placeholder="Name"
+      />
+      <input
+        [(ngModel)]="password"
+        name="password"
+        class="input"
+        type="password"
+        placeholder="Password"
+      />
+      <input
+        [(ngModel)]="contact"
+        name="contact"
+        class="input"
+        type="number"
+        placeholder="Contact"
+      />
       <mat-form-field>
         <mat-label>Birth Date</mat-label>
-        <input matInput [matDatepicker]="myDatepicker" />
+        <input
+          [(ngModel)]="birthDate"
+          name="birthDate"
+          matInput
+          [matDatepicker]="myDatepicker"
+        />
         <mat-datepicker-toggle
           matSuffix
           [for]="myDatepicker"

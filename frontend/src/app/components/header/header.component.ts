@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../services/session.service';
+import { SessionService } from '../../services/session.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,14 +15,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     if (!this.user) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     } else {
       if (this.user.role == 'Admin') {
         this.router.navigate(['/dashboard']);
       } else if (this.user.role == 'Employee') {
         this.router.navigate(['/table']);
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     }
   }

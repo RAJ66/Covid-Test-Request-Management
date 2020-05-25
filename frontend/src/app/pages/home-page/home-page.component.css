@@ -1,0 +1,21 @@
+img {
+  width: 100%;
+}
+
+.container {
+  width: 90%;
+  max-width: 980px;
+  margin: auto;
+}
+
+hr {
+  border: 10px solid #2d82bb;
+}
+
+h1 {
+  text-align: center;
+  background-color: #58ace4;
+  color: #fff;
+  padding: 7px;
+  margin-top: 10px;
+}

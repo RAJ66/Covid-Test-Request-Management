@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { RequestComponent } from './request/request.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,6 +21,7 @@ import { KpiComponent } from './components/kpi/kpi.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-modules';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DemoMaterialModule } from './material-modules';
     LoginPageComponent,
     KpiComponent,
     RegisterPageComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,8 +15,15 @@ const httpOptions = environment.headers;
 export class RequestsService {
   constructor(public http: HttpClient) {}
 
-  getRequests(): Observable<any> {
-    return this.http.get(`${API_URL}requests`, httpOptions);
+  getRequests(filter): Observable<any> {
+    if (!filter) {
+      return this.http.get(`${API_URL}requests`, httpOptions);
+    } else {
+      return this.http.get(
+        `${API_URL}requests?requestState=${filter}`,
+        httpOptions
+      );
+    }
   }
 
   createRequest(request: object): Observable<any> {

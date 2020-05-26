@@ -40,7 +40,7 @@ requestController.getAll = async function (req, res) {
 requestController.getOne = async function (req, res) {
   try {
     const { id } = req.params;
-    const request = await Request.findById(id);
+    const request = await Request.findOne({ id: id });
     res.json({ request });
   } catch (e) {
     res.status(404);

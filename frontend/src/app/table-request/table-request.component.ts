@@ -12,7 +12,7 @@ export class TableRequestComponent implements OnInit {
   constructor(public requests: RequestsService) {}
 
   ngOnInit(): void {
-    this.requests.getRequests().subscribe((res: any) => {
+    this.requests.getRequests(null).subscribe((res: any) => {
       this.list = res.requestList;
     });
   }

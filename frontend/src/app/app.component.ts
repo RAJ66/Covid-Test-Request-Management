@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
       } else if (this.user.role == 'Employee') {
         this.router.navigate(['/table']);
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/user']);
       }
     }
   }

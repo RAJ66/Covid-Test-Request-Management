@@ -56,6 +56,7 @@ sessionController.me = async function (req, res) {
     }
   } catch (e) {
     console.log(e.name, e.message);
+    res.status(500);
     res.json(null);
   }
 };

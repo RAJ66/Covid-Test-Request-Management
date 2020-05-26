@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  user: any;
-
+  
   constructor(public session: SessionService, public router: Router) {}
 
   ngOnInit(): void {}
+
 }

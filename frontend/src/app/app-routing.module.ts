@@ -8,6 +8,7 @@ import { TestMaterialComponent } from './test-material/test-material.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { QuestionPageComponent } from './pages/question-page/question-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'material', component: TestMaterialComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
+  { path: 'question', component: QuestionPageComponent },
 ];
 
 @NgModule({

@@ -24,6 +24,7 @@ dashBoardController.list = async function (req, res) {
       requestTotalUn,
     });
   } catch (e) {
+    res.status(500);
     res.json({ err: e });
   }
 };

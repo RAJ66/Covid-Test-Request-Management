@@ -15,14 +15,20 @@ userController.getAll = async function (req, res) {
     const userList = await User.find(filters);
     res.json({ userList });
   } catch (e) {
-    res.json({});
+    res.status(500);
+    res.json({ err: e });
   }
 };
 
 userController.getOne = async function (req, res) {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  res.json({ user });
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.json({ user });
+  } catch (e) {
+    res.status(404);
+    res.json({ err: e });
+  }
 };
 
 userController.create = async function (req, res) {
@@ -30,6 +36,7 @@ userController.create = async function (req, res) {
     const userDB = await User.findOne({ nif: req.body.nif });
 
     if (userDB) {
+      res.status(403);
       res.json({});
     } else {
       const password = req.body.password;
@@ -43,20 +50,36 @@ userController.create = async function (req, res) {
       res.json({ result });
     }
   } catch (e) {
-    res.json({});
+    res.status(500);
+    res.json({ err: e });
   }
 };
 
 userController.update = async function (req, res) {
   const { id } = req.params;
-  const result = await User.findByIdAndUpdate(id, req.body);
-  res.json({ result });
+  const user = await User.findById(id);
+
+  if (user) {
+    const result = await User.findByIdAndUpdate(id, req.body);
+    res.json({ result });
+  } else {
+    res.status(404);
+    res.json({});
+  }
 };
 
 userController.delete = async function (req, res) {
   const { id } = req.params;
-  await User.findByIdAndDelete(id);
-  res.json({ delete: true });
+
+  const user = await User.findById(id);
+
+  if (user) {
+    await User.findByIdAndDelete(id);
+    res.json({ delete: true });
+  } else {
+    res.status(404);
+    res.json({ delete: false });
+  }
 };
 
 module.exports = userController;

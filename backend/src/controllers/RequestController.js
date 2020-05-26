@@ -32,14 +32,20 @@ requestController.getAll = async function (req, res) {
     const requestList = await Request.find(filters);
     res.json({ requestList });
   } catch (e) {
+    res.status(500);
     res.json({ err: e });
   }
 };
 
 requestController.getOne = async function (req, res) {
-  const { id } = req.params;
-  const request = await Request.findById(id);
-  res.json({ request });
+  try {
+    const { id } = req.params;
+    const request = await Request.findById(id);
+    res.json({ request });
+  } catch (e) {
+    res.status(404);
+    res.json({ err: e });
+  }
 };
 
 requestController.create = async function (req, res) {
@@ -93,6 +99,7 @@ requestController.create = async function (req, res) {
       }
     }
   } catch (e) {
+    res.status(500);
     res.json({ err: e });
   }
 };
@@ -169,14 +176,23 @@ requestController.update = async function (req, res) {
       res.json({ updatedRequest });
     }
   } catch (e) {
-    res.json({});
+    res.status(500);
+    res.json({ err: e });
   }
 };
 
 requestController.delete = async function (req, res) {
   const { id } = req.params;
-  await Request.findByIdAndDelete(id);
-  res.json({ delete: true });
+
+  const request = await Request.findById(id);
+
+  if (request) {
+    await Request.findByIdAndDelete(id);
+    res.json({ delete: true });
+  } else {
+    res.status(404);
+    res.json({ delete: false });
+  }
 };
 
 module.exports = requestController;

@@ -19,8 +19,20 @@ export class UsersService {
     return this.http.get(`${API_URL}users`, httpOptions);
   }
 
-  createUser(user: object): Observable<any> {
-    return this.http.post(`${API_URL}users`, user, httpOptions);
+  createUser(
+    nif: number,
+    password: string,
+    email: string,
+    name: string,
+    birthDate: Date,
+    contact: number,
+    role: string
+  ): Observable<any> {
+    return this.http.post(
+      `${API_URL}users`,
+      { nif, password, email, name, birthDate, contact, role },
+      httpOptions
+    );
   }
 
   getOneUser(userId: string): Observable<any> {

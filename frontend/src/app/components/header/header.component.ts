@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(public session: SessionService, public router: Router) {}
 
   ngOnInit(): void {
+    /*
     this.user = JSON.parse(localStorage.getItem('user'));
     if (!this.user) {
       this.router.navigate(['/home']);
@@ -24,7 +25,7 @@ export class HeaderComponent implements OnInit {
       } else {
         this.router.navigate(['/home']);
       }
-    }
+    }*/
   }
 
   logout() {

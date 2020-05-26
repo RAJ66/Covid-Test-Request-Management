@@ -22,6 +22,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-modules';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { QuestionPageComponent } from './pages/question-page/question-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     KpiComponent,
     RegisterPageComponent,
     HomePageComponent,
+    QuestionPageComponent,
   ],
   imports: [
     BrowserModule,

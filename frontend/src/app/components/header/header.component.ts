@@ -13,8 +13,4 @@ export class HeaderComponent implements OnInit {
   constructor(public session: SessionService, public router: Router) {}
 
   ngOnInit(): void {}
-
-  logout() {
-    this.session.logout().subscribe();
-  }
 }

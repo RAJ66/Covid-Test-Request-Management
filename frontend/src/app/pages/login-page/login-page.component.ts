@@ -28,7 +28,7 @@ export class LoginPageComponent implements OnInit {
       if (user.role === 'Admin') {
         this.router.navigate(['dashboard']);
       } else if (user.role === 'Employee') {
-        this.router.navigate(['table']);
+        this.router.navigate(['employee']);
       } else {
         this.router.navigate(['/home']);
       }

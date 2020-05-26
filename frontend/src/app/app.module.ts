@@ -23,6 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DemoMaterialModule } from './material-modules';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { QuestionPageComponent } from './pages/question-page/question-page.component';
+import { EmployeePageComponent } from './pages/employee-page/employee-page.component';
+import { HeaderEmployeeComponent } from './components/header-employee/header-employee.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { QuestionPageComponent } from './pages/question-page/question-page.compo
     RegisterPageComponent,
     HomePageComponent,
     QuestionPageComponent,
+    EmployeePageComponent,
+    HeaderEmployeeComponent,
   ],
   imports: [
     BrowserModule,

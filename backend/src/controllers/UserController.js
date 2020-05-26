@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const generatePassCrypt = require("../utils/crypt");
 
 var userController = {};
 
@@ -39,11 +40,7 @@ userController.create = async function (req, res) {
       res.status(403);
       res.json({});
     } else {
-      const password = req.body.password;
-      const passwordHash = await bcrypt.hashSync(
-        password,
-        bcrypt.genSaltSync(10)
-      );
+      const passwordHash = await generatePassCrypt(req.body.password);
       req.body.password = passwordHash;
 
       const result = await User.create(req.body);

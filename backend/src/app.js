@@ -8,7 +8,8 @@ const logger = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const sessionMiddleware = require("./middleware/session");
-
+const bcrypt = require("bcrypt");
+const generatePassCrypt = require("../src/utils/crypt");
 //Routes
 const indexRouter = require("./routes/index");
 
@@ -29,9 +30,10 @@ mongoose
     const adminUser = await User.findOne({ role: "Admin" });
     if (!adminUser) {
       console.log("creating admin user!");
+      const passwordHash = await generatePassCrypt(process.env.PASS_ADMIN);
       const adminUser = await new User({
         nif: process.env.NIF_ADMIN,
-        password: process.env.PASS_ADMIN,
+        password: passwordHash,
         role: "Admin",
       })
         .save()

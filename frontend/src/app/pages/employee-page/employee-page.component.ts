@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestsService } from '../../services/requests.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-employee-page',
@@ -9,8 +10,16 @@ import { RequestsService } from '../../services/requests.service';
 export class EmployeePageComponent implements OnInit {
   list = [];
   requestId: string;
-  displayedColumns: string[] = ['position', 'name'];
-  filter: string;
+  displayedColumns: string[] = [
+    'id',
+    'requestState',
+    'userState',
+    'userId',
+    'firstTestResult',
+    'secondTestResult',
+    'employeeId',
+  ];
+  information: string;
 
   constructor(public requests: RequestsService) {}
 

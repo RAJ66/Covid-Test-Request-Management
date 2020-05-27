@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RequestsService } from '../../services/requests.service';
 import { DataService } from '../../services/data.service';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-employee-page',
@@ -9,6 +11,7 @@ import { DataService } from '../../services/data.service';
 })
 export class EmployeePageComponent implements OnInit {
   list = [];
+  dataSource: any;
   requestId: string;
   displayedColumns: string[] = [
     'id',
@@ -25,9 +28,13 @@ export class EmployeePageComponent implements OnInit {
 
   constructor(public requests: RequestsService, public data: DataService) {}
 
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   ngOnInit(): void {
     this.requests.getRequests(null).subscribe((res: any) => {
       this.list = res.requestList;
+      this.dataSource = new MatTableDataSource(res.requestList);
+      this.dataSource.sort = this.sort;
     });
 
     this.data.currentInformation.subscribe(

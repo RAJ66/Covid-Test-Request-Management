@@ -12,6 +12,7 @@ export class RequestPageComponent implements OnInit {
   information: string;
   request: any;
   employee: any;
+  requestState: boolean;
 
   constructor(
     public data: DataService,
@@ -26,6 +27,7 @@ export class RequestPageComponent implements OnInit {
 
     this.requests.getOneRequest(this.information).subscribe((res) => {
       this.request = res.request;
+      this.requestState = this.request.requestState === 'Done';
     });
 
     this.users

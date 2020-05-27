@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { RequestsService } from '../../services/requests.service';
 import { UsersService } from '../../services/users.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-request-page',
@@ -17,7 +18,8 @@ export class RequestPageComponent implements OnInit {
   constructor(
     public data: DataService,
     public requests: RequestsService,
-    public users: UsersService
+    public users: UsersService,
+    public location: Location
   ) {}
 
   ngOnInit(): void {
@@ -45,5 +47,9 @@ export class RequestPageComponent implements OnInit {
         this.request.employeeId = this.employee._id;
         this.requests.updateRequest(this.request._id, this.request).subscribe();
       });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

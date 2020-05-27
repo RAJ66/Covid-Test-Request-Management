@@ -24,3 +24,14 @@
 button {
   margin-top: 5px;
 }
+
+.button-back {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  width: 100%;
+}
+
+.information {
+  width: 100%;
+}

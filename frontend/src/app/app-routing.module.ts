@@ -12,6 +12,7 @@ import { QuestionPageComponent } from './pages/question-page/question-page.compo
 import { EmployeePageComponent } from './pages/employee-page/employee-page.component';
 import { RequestPageComponent } from './pages/request-page/request-page.component';
 import { UpdateRequestPageComponent } from './pages/update-request-page/update-request-page.component';
+import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/employee-requests-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'employee', component: EmployeePageComponent },
   { path: 'employee/request', component: RequestPageComponent },
   { path: 'employee/request/update', component: UpdateRequestPageComponent },
+  { path: 'employee/requests', component: EmployeeRequestsPageComponent },
 ];
 
 @NgModule({

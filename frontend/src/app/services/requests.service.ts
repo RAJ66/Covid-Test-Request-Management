@@ -32,7 +32,6 @@ export class RequestsService {
   }
 
   updateRequest(requestId: string, newInformation: object): Observable<any> {
-    console.log('teste');
     return this.http.put(
       `${API_URL}request/${requestId}`,
       newInformation,

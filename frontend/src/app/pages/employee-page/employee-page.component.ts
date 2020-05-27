@@ -35,10 +35,16 @@ export class EmployeePageComponent implements OnInit {
 
   handleSubmit(event): void {
     event.preventDefault();
-    this.requests.getOneRequest(this.requestId).subscribe((res: any) => {
-      this.list = [];
-      this.list[0] = res.request;
-    });
+    if (this.requestId) {
+      this.requests.getOneRequest(this.requestId).subscribe((res: any) => {
+        this.list = [];
+        this.list[0] = res.request;
+      });
+    } else {
+      this.requests.getRequests(null).subscribe((res: any) => {
+        this.list = res.requestList;
+      });
+    }
   }
 
   showRequest(requestId) {

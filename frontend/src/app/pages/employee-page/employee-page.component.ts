@@ -21,12 +21,16 @@ export class EmployeePageComponent implements OnInit {
   ];
   information: string;
 
-  constructor(public requests: RequestsService) {}
+  constructor(public requests: RequestsService, public data: DataService) {}
 
   ngOnInit(): void {
     this.requests.getRequests(null).subscribe((res: any) => {
       this.list = res.requestList;
     });
+
+    this.data.currentInformation.subscribe(
+      (information) => (this.information = information)
+    );
   }
 
   handleSubmit(event): void {
@@ -35,5 +39,9 @@ export class EmployeePageComponent implements OnInit {
       this.list = [];
       this.list[0] = res.request;
     });
+  }
+
+  showRequest(requestId) {
+    this.data.changeinformation(requestId);
   }
 }

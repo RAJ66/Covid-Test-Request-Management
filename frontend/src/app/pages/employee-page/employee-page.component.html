@@ -17,7 +17,12 @@
   <!-- Position Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element">
+    <td
+      mat-cell
+      *matCellDef="let element"
+      (click)="showRequest(element.id)"
+      routerLink="/employee/request"
+    >
       {{ element.id }}
     </td>
   </ng-container>

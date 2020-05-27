@@ -38,6 +38,6 @@ button {
   filter: brightness(90%);
 }
 
-.filter {
+.requestId {
   cursor: pointer;
 }

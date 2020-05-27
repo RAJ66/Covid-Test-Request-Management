@@ -11,6 +11,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UpdateRequestPageComponent implements OnInit {
   information: string;
   request: any;
+  testResultPending: string = 'Pending';
+
+  equal: boolean;
 
   constructor(
     public data: DataService,
@@ -25,10 +28,12 @@ export class UpdateRequestPageComponent implements OnInit {
 
     this.requests.getOneRequest(this.information).subscribe((res) => {
       this.request = res.request;
+      this.equal = this.request.firstTestResult !== this.testResultPending;
     });
   }
 
-  updateRequest() {
+  updateRequest(event) {
+    event.preventDefault();
     this.requests
       .updateRequest(this.request._id, this.request)
       .subscribe(() => {

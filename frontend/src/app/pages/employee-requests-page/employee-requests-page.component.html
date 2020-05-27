@@ -43,9 +43,19 @@
     <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="firstTestDate">
+    <th mat-header-cell *matHeaderCellDef>First Test Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.firstTestDate }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="firstTestResult">
-    <th mat-header-cell *matHeaderCellDef>First Test</th>
+    <th mat-header-cell *matHeaderCellDef>First Test Result</th>
     <td mat-cell *matCellDef="let element">{{ element.firstTestResult }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="secondTestDate">
+    <th mat-header-cell *matHeaderCellDef>Second Test Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.secondTestDate }}</td>
   </ng-container>
 
   <ng-container matColumnDef="secondTestResult">

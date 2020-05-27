@@ -15,7 +15,9 @@ export class EmployeePageComponent implements OnInit {
     'requestState',
     'userState',
     'userId',
+    'firstTestDate',
     'firstTestResult',
+    'secondTestDate',
     'secondTestResult',
     'employeeId',
   ];

@@ -9,65 +9,88 @@
     <p>saude24: {{ request.saude24 }}</p>
 
     <form>
-      <mat-form-field>
-        <mat-label>First Test Date</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker1"
-          [value]="request.firstTestDate"
-          [(ngModel)]="request.firstTestDate"
-          [ngModelOptions]="{ standalone: true }"
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker1"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            First Test
+          </mat-panel-title>
+          <mat-panel-description>
+            Fill the information about the first test
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <mat-label>First Test Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            [value]="request.firstTestDate"
+            [(ngModel)]="request.firstTestDate"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="request.firstTestDate">
+          <mat-label>Result</mat-label>
+          <mat-select
+            [(ngModel)]="request.firstTestResult"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <mat-option value="Positive">Positive</mat-option>
+            <mat-option value="Negative">Negative</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-expansion-panel>
+
       <br />
-      <mat-form-field>
-        <mat-label>First Test Result</mat-label>
-        <mat-select
-          [(ngModel)]="request.firstTestResult"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <mat-option value="Positive">Positive</mat-option>
-          <mat-option value="Negative">Negative</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Second Test Date</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker2"
-          [value]="request.secondTestDate"
-          [(ngModel)]="request.secondTestDate"
-          [ngModelOptions]="{ standalone: true }"
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker2"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Second Test Result</mat-label>
-        <mat-select
-          [(ngModel)]="request.secondTestResult"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <mat-option value="Positive">Positive</mat-option>
-          <mat-option value="Negative">Negative</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header *ngIf="equal">
+          <mat-panel-title>
+            Second Test
+          </mat-panel-title>
+          <mat-panel-description>
+            Fill the information about the second test
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <mat-label>Second Test Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            [value]="request.secondTestDate"
+            [(ngModel)]="request.secondTestDate"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Result</mat-label>
+          <mat-select
+            [(ngModel)]="request.secondTestResult"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <mat-option value="Positive">Positive</mat-option>
+            <mat-option value="Negative">Negative</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-expansion-panel>
     </form>
 
     <p>Request State: {{ request.requestState }}</p>
     <p>User State: {{ request.userState }}</p>
 
-    <button mat-raised-button color="primary" (click)="updateRequest()">
+    <button mat-raised-button color="primary" (click)="updateRequest($event)">
       Confirm
     </button>
     <button mat-raised-button color="primary" routerLink="/employee/request">

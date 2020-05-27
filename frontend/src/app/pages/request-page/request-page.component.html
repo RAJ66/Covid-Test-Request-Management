@@ -1,6 +1,6 @@
 <app-header-employee></app-header-employee>
 <div class="request-container">
-  <div class="content">
+  <div class="content" *ngIf="request">
     <h2>Request {{ information }}</h2>
     <p *ngIf="request.employeeId; else noId">
       Employee ID: {{ request.employeeId }}
@@ -29,11 +29,12 @@
     <p>Request State: {{ request.requestState }}</p>
     <p>User State: {{ request.userState }}</p>
 
-    <div class="button-container">
+    <div class="button-container" *ngIf="employee">
       <button
         mat-raised-button
         color="primary"
         routerLink="/employee/request/update"
+        *ngIf="request.employeeId == employee._id"
       >
         Update
       </button>

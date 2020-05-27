@@ -11,7 +11,7 @@ import { UsersService } from '../../services/users.service';
 export class RequestPageComponent implements OnInit {
   information: string;
   request: any;
-  employee;
+  employee: any;
 
   constructor(
     public data: DataService,
@@ -27,6 +27,12 @@ export class RequestPageComponent implements OnInit {
     this.requests.getOneRequest(this.information).subscribe((res) => {
       this.request = res.request;
     });
+
+    this.users
+      .getUsers(`nif=${JSON.parse(localStorage.getItem('user')).nif}`)
+      .subscribe((res) => {
+        this.employee = res.userList[0];
+      });
   }
 
   claimRequest() {

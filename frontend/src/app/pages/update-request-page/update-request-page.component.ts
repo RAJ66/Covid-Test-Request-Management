@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { RequestsService } from '../../services/requests.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-request-page',
@@ -10,9 +11,12 @@ import { RequestsService } from '../../services/requests.service';
 export class UpdateRequestPageComponent implements OnInit {
   information: string;
   request: any;
-  test: string;
 
-  constructor(public data: DataService, public requests: RequestsService) {}
+  constructor(
+    public data: DataService,
+    public requests: RequestsService,
+    public router: Router
+  ) {}
 
   ngOnInit(): void {
     this.data.currentInformation.subscribe(
@@ -24,7 +28,11 @@ export class UpdateRequestPageComponent implements OnInit {
     });
   }
 
-  show() {
-    console.log(this.test);
+  updateRequest() {
+    this.requests
+      .updateRequest(this.request._id, this.request)
+      .subscribe(() => {
+        this.router.navigate(['/employee/request']);
+      });
   }
 }

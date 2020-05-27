@@ -10,8 +10,54 @@
 
     <form>
       <mat-form-field>
+        <mat-label>First Test Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          [value]="request.firstTestDate"
+          [(ngModel)]="request.firstTestDate"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
         <mat-label>First Test Result</mat-label>
-        <mat-select [(ngModel)]="test" [ngModelOptions]="{ standalone: true }">
+        <mat-select
+          [(ngModel)]="request.firstTestResult"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <mat-option value="Positive">Positive</mat-option>
+          <mat-option value="Negative">Negative</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Second Test Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [value]="request.secondTestDate"
+          [(ngModel)]="request.secondTestDate"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Second Test Result</mat-label>
+        <mat-select
+          [(ngModel)]="request.secondTestResult"
+          [ngModelOptions]="{ standalone: true }"
+        >
           <mat-option value="Positive">Positive</mat-option>
           <mat-option value="Negative">Negative</mat-option>
         </mat-select>
@@ -21,7 +67,11 @@
     <p>Request State: {{ request.requestState }}</p>
     <p>User State: {{ request.userState }}</p>
 
-    <button (click)="show()">Confirm</button>
-    <button>Cancel</button>
+    <button mat-raised-button color="primary" (click)="updateRequest()">
+      Confirm
+    </button>
+    <button mat-raised-button color="primary" routerLink="/employee/request">
+      Cancel
+    </button>
   </div>
 </div>

@@ -10,9 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./employee-page.component.css'],
 })
 export class EmployeePageComponent implements OnInit {
-  list = [];
   dataSource: any;
-  requestId: string;
   displayedColumns: string[] = [
     'id',
     'requestState',
@@ -32,7 +30,6 @@ export class EmployeePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.requests.getRequests(null).subscribe((res: any) => {
-      this.list = res.requestList;
       this.dataSource = new MatTableDataSource(res.requestList);
       this.dataSource.sort = this.sort;
     });
@@ -42,17 +39,12 @@ export class EmployeePageComponent implements OnInit {
     );
   }
 
-  handleSubmit(event): void {
-    event.preventDefault();
-    if (this.requestId) {
-      this.requests.getOneRequest(this.requestId).subscribe((res: any) => {
-        this.list = [];
-        this.list[0] = res.request;
-      });
-    } else {
-      this.requests.getRequests(null).subscribe((res: any) => {
-        this.list = res.requestList;
-      });
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 

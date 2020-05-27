@@ -1,1 +1,27 @@
-<p>update-request-page works!</p>
+<app-header-employee></app-header-employee>
+<div class="update-request-container">
+  <div class="content">
+    <h2>Request {{ information }}</h2>
+    <p>Employee ID: {{ request.employeeId }}</p>
+    <p>User ID: {{ request.userId }}</p>
+    <p>Risk Group: {{ request.riskGroup }}</p>
+    <p>Risk Profession: {{ request.riskProfession }}</p>
+    <p>saude24: {{ request.saude24 }}</p>
+
+    <form>
+      <mat-form-field>
+        <mat-label>First Test Result</mat-label>
+        <mat-select [(ngModel)]="test" [ngModelOptions]="{ standalone: true }">
+          <mat-option value="Positive">Positive</mat-option>
+          <mat-option value="Negative">Negative</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+    <p>Request State: {{ request.requestState }}</p>
+    <p>User State: {{ request.userState }}</p>
+
+    <button (click)="show()">Confirm</button>
+    <button>Cancel</button>
+  </div>
+</div>

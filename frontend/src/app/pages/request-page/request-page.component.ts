@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { RequestsService } from '../../services/requests.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-request-page',
@@ -10,8 +11,13 @@ import { RequestsService } from '../../services/requests.service';
 export class RequestPageComponent implements OnInit {
   information: string;
   request: any;
+  employee;
 
-  constructor(public data: DataService, public requests: RequestsService) {}
+  constructor(
+    public data: DataService,
+    public requests: RequestsService,
+    public users: UsersService
+  ) {}
 
   ngOnInit(): void {
     this.data.currentInformation.subscribe(
@@ -21,5 +27,15 @@ export class RequestPageComponent implements OnInit {
     this.requests.getOneRequest(this.information).subscribe((res) => {
       this.request = res.request;
     });
+  }
+
+  claimRequest() {
+    this.users
+      .getUsers(`nif=${JSON.parse(localStorage.getItem('user')).nif}`)
+      .subscribe((res) => {
+        this.employee = res.userList[0];
+        this.request.employeeId = this.employee._id;
+        this.requests.updateRequest(this.request._id, this.request).subscribe();
+      });
   }
 }

@@ -15,5 +15,8 @@
     <p>User State: {{ request.userState }}</p>
 
     <button routerLink="/employee/request/update">Update</button>
+    <button (click)="claimRequest()" *ngIf="!request.employeeId">
+      Claim Request
+    </button>
   </div>
 </div>

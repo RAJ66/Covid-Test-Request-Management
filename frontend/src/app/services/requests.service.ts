@@ -16,7 +16,6 @@ export class RequestsService {
   constructor(public http: HttpClient) {}
 
   getRequests(filter: string): Observable<any> {
-    console.log(filter);
     if (!filter) {
       return this.http.get(`${API_URL}requests`, httpOptions);
     } else {
@@ -33,6 +32,7 @@ export class RequestsService {
   }
 
   updateRequest(requestId: string, newInformation: object): Observable<any> {
+    console.log('teste');
     return this.http.put(
       `${API_URL}request/${requestId}`,
       newInformation,

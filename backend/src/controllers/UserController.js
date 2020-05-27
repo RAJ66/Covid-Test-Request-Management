@@ -11,6 +11,9 @@ userController.getAll = async function (req, res) {
     if (req.query.role) {
       filters.role = req.query.role;
     }
+    if (req.query.nif) {
+      filters.nif = req.query.nif;
+    }
 
     const userList = await User.find(filters);
     res.json({ userList });

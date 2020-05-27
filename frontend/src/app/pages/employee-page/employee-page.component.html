@@ -1,0 +1,74 @@
+<app-header-employee></app-header-employee>
+
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" />
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      (click)="showRequest(element.id)"
+      routerLink="/employee/request"
+      class="requestId"
+    >
+      {{ element.id }}
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="requestState">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Resquest State</th>
+    <td mat-cell *matCellDef="let element">{{ element.requestState }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="userState">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>User State</th>
+    <td mat-cell *matCellDef="let element">{{ element.userState }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="userId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstTestDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>First Test Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.firstTestDate }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstTestResult">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>First Test</th>
+    <td mat-cell *matCellDef="let element">{{ element.firstTestResult }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="secondTestDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Second Test Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.secondTestDate }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="secondTestResult">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Second Test</th>
+    <td mat-cell *matCellDef="let element">{{ element.secondTestResult }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="employeeId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsible</th>
+    <td mat-cell *matCellDef="let element">{{ element.employeeId }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+></mat-paginator>

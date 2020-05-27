@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
       if (this.user.role == 'Admin') {
         this.router.navigate(['/dashboard']);
       } else if (this.user.role == 'Employee') {
-        this.router.navigate(['/table']);
+        this.router.navigate(['/employee']);
       } else {
         this.router.navigate(['/']);
       }

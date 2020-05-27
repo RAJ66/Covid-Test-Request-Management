@@ -1,0 +1,58 @@
+<app-header-employee></app-header-employee>
+<div class="request-container">
+  <div class="content" *ngIf="request">
+    <div class="button-back">
+      <button mat-raised-button color="primary" (click)="goBack()">
+        Go Back
+      </button>
+    </div>
+    <div class="information">
+      <h2>Request {{ information }}</h2>
+      <p *ngIf="request.employeeId; else noId">
+        Employee ID: {{ request.employeeId }}
+      </p>
+      <ng-template #noId>Employee ID: None</ng-template>
+      <p>User ID: {{ request.userId }}</p>
+
+      <p>Risk Group: {{ request.riskGroup }}</p>
+      <p>Risk Profession: {{ request.riskProfession }}</p>
+      <p>saude24: {{ request.saude24 }}</p>
+
+      <p *ngIf="request.firstTestDate; else noFirstDate">
+        First Test Date: {{ request.firstTestDate }}
+      </p>
+      <ng-template #noFirstDate>
+        First Test Date: None
+      </ng-template>
+      <p>First Test Result: {{ request.firstTestResult }}</p>
+      <p *ngIf="request.secondTestDate; else noSecondDate">
+        Second Test Date: {{ request.secondTestDate }}
+      </p>
+      <ng-template #noSecondDate>
+        Second Test Date: None
+      </ng-template>
+      <p>Second Test Result: {{ request.secondTestResult }}</p>
+      <p>Request State: {{ request.requestState }}</p>
+      <p>User State: {{ request.userState }}</p>
+
+      <div class="button-container" *ngIf="employee">
+        <button
+          mat-raised-button
+          color="primary"
+          routerLink="/employee/request/update"
+          *ngIf="request.employeeId == employee._id && !requestState"
+        >
+          Update
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="claimRequest()"
+          *ngIf="!request.employeeId"
+        >
+          Claim Request
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

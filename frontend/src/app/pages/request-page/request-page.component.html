@@ -1,1 +1,19 @@
 <app-header-employee></app-header-employee>
+<div class="request-container">
+  <div class="content">
+    <h2>Request {{ request.id }}</h2>
+    <p>Employee ID: {{ request.employeeId }}</p>
+    <p>User ID: {{ request.userId }}</p>
+    <p>Risk Group: {{ request.riskGroup }}</p>
+    <p>Risk Profession: {{ request.riskProfession }}</p>
+    <p>saude24: {{ request.saude24 }}</p>
+    <p>First Test Date: {{ request.firstTestDate }}</p>
+    <p>First Test Result: {{ request.firstTestResult }}</p>
+    <p>Second Test Date: {{ request.secondTestDate }}</p>
+    <p>Second Test Result: {{ request.secondTestResult }}</p>
+    <p>Request State: {{ request.requestState }}</p>
+    <p>User State: {{ request.userState }}</p>
+
+    <button>Update</button>
+  </div>
+</div>

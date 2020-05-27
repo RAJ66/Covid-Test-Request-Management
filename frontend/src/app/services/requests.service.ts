@@ -15,14 +15,12 @@ const httpOptions = environment.headers;
 export class RequestsService {
   constructor(public http: HttpClient) {}
 
-  getRequests(filter): Observable<any> {
+  getRequests(filter: string): Observable<any> {
+    console.log(filter);
     if (!filter) {
       return this.http.get(`${API_URL}requests`, httpOptions);
     } else {
-      return this.http.get(
-        `${API_URL}requests?requestState=${filter}`,
-        httpOptions
-      );
+      return this.http.get(`${API_URL}requests?${filter}`, httpOptions);
     }
   }
 

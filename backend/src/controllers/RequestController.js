@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 const Request = require("../models/Request");
+const User = require("../models/User");
 
 const generateUniqueId = require("../utils/generateUniqueId");
 
@@ -27,6 +28,10 @@ requestController.getAll = async function (req, res) {
     }
     if (req.query.requestState) {
       filters.requestState = req.query.requestState;
+    }
+    if (req.query.employeeNif) {
+      const employee = await User.findOne({ nif: req.query.employeeNif });
+      filters.employeeId = employee._id;
     }
 
     const requestList = await Request.find(filters);

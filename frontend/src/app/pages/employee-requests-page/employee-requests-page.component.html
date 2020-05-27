@@ -1,14 +1,9 @@
 <app-header-employee></app-header-employee>
 
-<form (submit)="handleSubmit($event)">
-  <input
-    [(ngModel)]="requestId"
-    name="requestId"
-    type="text"
-    placeholder="Request ID"
-  />
-  <button type="submit">Search</button>
-</form>
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" />
+</mat-form-field>
 
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
   <!--- Note that these columns can be defined in any order.

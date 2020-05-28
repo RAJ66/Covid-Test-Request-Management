@@ -8,11 +8,11 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
-
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'question', component: QuestionPageComponent },
   { path: 'user', component: UserPageComponent },
+  { path: '**', component: HomePageComponent },
 ];
 
 @NgModule({

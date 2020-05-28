@@ -12,10 +12,10 @@ import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/em
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'question', component: QuestionPageComponent },
+  { path: 'user', component: UserPageComponent },
   { path: 'employee', component: EmployeePageComponent },
   { path: 'employee/request', component: RequestPageComponent },
   { path: 'employee/request/update', component: UpdateRequestPageComponent },

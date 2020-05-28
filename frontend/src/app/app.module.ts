@@ -9,12 +9,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './components/header/header.component';
-import { RequestComponent } from './request/request.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ListRequestComponent } from './list-request/list-request.component';
-import { TableRequestComponent } from './table-request/table-request.component';
-import { TestMaterialComponent } from './test-material/test-material.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
 import { KpiComponent } from './components/kpi/kpi.component';
@@ -33,11 +29,7 @@ import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/em
   declarations: [
     AppComponent,
     HeaderComponent,
-    RequestComponent,
     DashboardComponent,
-    ListRequestComponent,
-    TableRequestComponent,
-    TestMaterialComponent,
     LoginPageComponent,
     KpiComponent,
     RegisterPageComponent,

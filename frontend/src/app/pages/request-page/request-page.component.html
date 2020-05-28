@@ -1,13 +1,10 @@
 <app-header-employee></app-header-employee>
 <div class="request-container">
   <div class="content" *ngIf="request">
-    <div class="button-back">
-      <button mat-raised-button color="primary" (click)="goBack()">
-        Go Back
-      </button>
-    </div>
-    <div class="information">
+    <mat-toolbar color="primary" class="toolbar">
       <h2>Request {{ information }}</h2>
+    </mat-toolbar>
+    <div class="information">
       <p *ngIf="request.employeeId; else noId">
         Employee ID: {{ request.employeeId }}
       </p>
@@ -52,7 +49,13 @@
         >
           Claim Request
         </button>
+        <button mat-raised-button color="primary" (click)="goBack()">
+          Go Back
+        </button>
       </div>
     </div>
+  </div>
+  <div *ngIf="!request">
+    <mat-spinner></mat-spinner>
   </div>
 </div>

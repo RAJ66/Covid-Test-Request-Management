@@ -21,14 +21,17 @@ import { DemoMaterialModule } from './material-modules';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { QuestionPageComponent } from './pages/question-page/question-page.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
-import { HeaderUserComponent } from './components/header-user/header-user.component';
+import { EmployeePageComponent } from './pages/employee-page/employee-page.component';
+import { HeaderEmployeeComponent } from './components/header-employee/header-employee.component';
+import { RequestPageComponent } from './pages/request-page/request-page.component';
+import { UpdateRequestPageComponent } from './pages/update-request-page/update-request-page.component';
+import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/employee-requests-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DashboardComponent,
-
     LoginPageComponent,
     KpiComponent,
     RegisterPageComponent,
@@ -36,6 +39,11 @@ import { HeaderUserComponent } from './components/header-user/header-user.compon
     QuestionPageComponent,
     UserPageComponent,
     HeaderUserComponent,
+    EmployeePageComponent,
+    HeaderEmployeeComponent,
+    RequestPageComponent,
+    UpdateRequestPageComponent,
+    EmployeeRequestsPageComponent,
   ],
   imports: [
     BrowserModule,

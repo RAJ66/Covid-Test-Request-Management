@@ -15,8 +15,12 @@ const httpOptions = environment.headers;
 export class UsersService {
   constructor(public http: HttpClient) {}
 
-  getUsers(): Observable<any> {
-    return this.http.get(`${API_URL}users`, httpOptions);
+  getUsers(filter: string): Observable<any> {
+    if (!filter) {
+      return this.http.get(`${API_URL}users`, httpOptions);
+    } else {
+      return this.http.get(`${API_URL}users?${filter}`, httpOptions);
+    }
   }
 
   createUser(

@@ -52,7 +52,7 @@ userController.create = async function (req, res) {
 
     if (userDB) {
       res.status(403);
-      res.json({});
+      res.json({ err: "User exist" });
     } else {
       const passwordHash = await generatePassCrypt(req.body.password);
       req.body.password = passwordHash;

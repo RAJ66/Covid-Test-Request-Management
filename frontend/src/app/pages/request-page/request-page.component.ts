@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { RequestsService } from '../../services/requests.service';
 import { UsersService } from '../../services/users.service';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request-page',
@@ -19,7 +19,7 @@ export class RequestPageComponent implements OnInit {
     public data: DataService,
     public requests: RequestsService,
     public users: UsersService,
-    public location: Location
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +50,6 @@ export class RequestPageComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['/employee/requests']);
   }
 }

@@ -16,9 +16,11 @@ import { FormsModule } from '@angular/forms';
 import { KpiComponent } from './components/kpi/kpi.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+//new material
 import { DemoMaterialModule } from './material-modules';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { QuestionPageComponent } from './pages/question-page/question-page.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
 import { EmployeePageComponent } from './pages/employee-page/employee-page.component';
 import { HeaderEmployeeComponent } from './components/header-employee/header-employee.component';
 import { RequestPageComponent } from './pages/request-page/request-page.component';
@@ -35,6 +37,8 @@ import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/em
     RegisterPageComponent,
     HomePageComponent,
     QuestionPageComponent,
+    UserPageComponent,
+    HeaderUserComponent,
     EmployeePageComponent,
     HeaderEmployeeComponent,
     RequestPageComponent,

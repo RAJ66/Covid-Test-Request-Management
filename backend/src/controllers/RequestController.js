@@ -5,6 +5,23 @@ const Request = require("../models/Request");
 const User = require("../models/User");
 
 const generateUniqueId = require("../utils/generateUniqueId");
+const sendEmail = require("../utils/sendEmail");
+
+function sendDate(user, date) {
+  sendEmail(
+    user.email,
+    "Request Date",
+    `Caro ${user.name} seu teste ficou marcado para dia ${date}.`
+  );
+}
+
+function sendResult(user, result) {
+  sendEmail(
+    user.email,
+    "Result Request",
+    `Caro ${user.name} era para informar que o resultado do seu teste foi ${result}.`
+  );
+}
 
 const requestController = {};
 
@@ -125,7 +142,8 @@ requestController.update = async function (req, res) {
 
     const save = {};
     let updated = false;
-    const old = await Request.findById(id);
+    const old = await Request.findById(id).populate("userId");
+    console.log(old.userId);
 
     if (old.requestState == requestDone || old.userState == userInfected) {
       updated = true;
@@ -136,6 +154,7 @@ requestController.update = async function (req, res) {
       save.firstTestDate = req.body.firstTestDate;
       const updatedRequest = await Request.findByIdAndUpdate(id, save);
       updated = true;
+      sendDate(old.userId, req.body.firstTestDate);
       res.json({ updatedRequest });
     }
     //meter primeiro resultado
@@ -147,11 +166,14 @@ requestController.update = async function (req, res) {
     ) {
       updated = true;
       save.firstTestResult = req.body.firstTestResult;
+      sendResult(old.userId, req.body.firstTestResult);
+
       //Se o primeiro resultado for positivo
       if (save.firstTestResult == testResultPositive) {
         save.userState = userInfected;
         save.requestState = requestDone;
         const updatedRequest = await Request.findByIdAndUpdate(id, save);
+        //sendDate(old.us,)
         res.json({ updatedRequest });
       } else {
         //Se o primeiro resultado for negativo
@@ -161,6 +183,7 @@ requestController.update = async function (req, res) {
         save.secondTestDate = secondDate;
         save.requestState = requestInProgress;
         const updatedRequest = await Request.findByIdAndUpdate(id, save);
+        sendDate(old.userId, secondDate);
         res.json({ updatedRequest });
       }
     }
@@ -174,6 +197,7 @@ requestController.update = async function (req, res) {
       save.secondTestResult = req.body.secondTestResult;
       save.requestState = requestDone;
 
+      sendResult(old.userId, req.body.secondTestResult);
       //se o segundo resultado for positivo
       if (save.secondTestResult == testResultPositive) {
         save.userState = userInfected;
@@ -185,12 +209,14 @@ requestController.update = async function (req, res) {
         res.json({ updatedRequest });
       }
     } else {
-      res.status(500);
-      res.json({ err: "Somehting went wrong with the request." });
+      // IMPORTANT FIX
+      //res.status(500);
+      //res.json({ err: "Somehting went wrong with the request." });
     }
   } catch (e) {
-    res.status(500);
-    res.json({ err: e });
+    // IMPORTANT FIX
+    // res.status(500);
+    // res.json({ err: e });
   }
 };
 

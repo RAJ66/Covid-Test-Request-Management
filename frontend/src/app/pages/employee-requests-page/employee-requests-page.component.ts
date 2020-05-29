@@ -25,7 +25,11 @@ export class EmployeeRequestsPageComponent implements OnInit {
     'employeeId',
   ];
   information: string;
-  employeeNif = JSON.parse(localStorage.getItem('user')).nif;
+
+  roleEmployee = 'Employee';
+  roleUser = 'User';
+
+  user = JSON.parse(localStorage.getItem('user'));
 
   constructor(public requests: RequestsService, public data: DataService) {}
 
@@ -33,13 +37,23 @@ export class EmployeeRequestsPageComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
-    this.requests
-      .getRequests(`employeeNif=${this.employeeNif}`)
-      .subscribe((res: any) => {
-        this.dataSource = new MatTableDataSource(res.requestList);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+    if (this.user.role === this.roleEmployee) {
+      this.requests
+        .getRequests(`employeeNif=${this.user.nif}`)
+        .subscribe((res: any) => {
+          this.dataSource = new MatTableDataSource(res.requestList);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        });
+    } else {
+      this.requests
+        .getRequests(`userNif=${this.user.nif}`)
+        .subscribe((res: any) => {
+          this.dataSource = new MatTableDataSource(res.requestList);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        });
+    }
 
     this.data.currentInformation.subscribe(
       (information) => (this.information = information)

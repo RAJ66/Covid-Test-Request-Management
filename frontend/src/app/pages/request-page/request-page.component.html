@@ -35,12 +35,12 @@
       <p>Request State: {{ request.requestState }}</p>
       <p>User State: {{ request.userState }}</p>
 
-      <div class="button-container" *ngIf="employee">
+      <div class="button-container" *ngIf="user && user.role === roleEmployee">
         <button
           mat-raised-button
           color="primary"
           routerLink="/employee/request/update"
-          *ngIf="request.employeeId == employee._id && !requestState"
+          *ngIf="request.employeeId == user._id && !requestState"
         >
           Update
         </button>

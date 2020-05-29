@@ -1,4 +1,5 @@
-<app-header-employee></app-header-employee>
+<app-header-employee *ngIf="user.role === roleEmployee"></app-header-employee>
+<app-header-user *ngIf="user.role === roleUser"></app-header-user>
 
 <mat-form-field>
   <mat-label>Filter</mat-label>

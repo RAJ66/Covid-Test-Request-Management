@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'question', component: QuestionPageComponent },
   { path: 'user', component: UserPageComponent },
   { path: 'user/profile', component: UserProfilePageComponent },
+  { path: 'user/requests', component: EmployeeRequestsPageComponent },
   { path: 'employee', component: EmployeePageComponent },
   { path: 'employee/request', component: RequestPageComponent },
   { path: 'employee/request/update', component: UpdateRequestPageComponent },

@@ -28,6 +28,7 @@ import { HeaderEmployeeComponent } from './components/header-employee/header-emp
 import { RequestPageComponent } from './pages/request-page/request-page.component';
 import { UpdateRequestPageComponent } from './pages/update-request-page/update-request-page.component';
 import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/employee-requests-page.component';
+import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/em
     RequestPageComponent,
     UpdateRequestPageComponent,
     EmployeeRequestsPageComponent,
+    UserProfilePageComponent,
   ],
   imports: [
     BrowserModule,

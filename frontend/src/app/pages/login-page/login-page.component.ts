@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
       } else if (user.role === 'Employee') {
         this.router.navigate(['employee']);
       } else {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/user']);
       }
     });
   }

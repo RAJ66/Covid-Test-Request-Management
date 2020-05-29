@@ -1,2 +1,26 @@
 <app-header-user></app-header-user>
-<p>user-profile-page works!</p>
+<div class="request-container">
+  <div class="content" *ngIf="user">
+    <mat-toolbar color="primary" class="toolbar">
+      <h2>{{ user.nif }}</h2>
+    </mat-toolbar>
+    <div class="information">
+      <p>Name: {{ user.name }}</p>
+      <p>E-mail: {{ user.email }}</p>
+      <p>Contact: {{ user.contact }}</p>
+      <p>Birth Date: {{ user.birthDate }}</p>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary">
+          Update
+        </button>
+        <button mat-raised-button color="primary" routerLink="/user/">
+          Go Back
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!user">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

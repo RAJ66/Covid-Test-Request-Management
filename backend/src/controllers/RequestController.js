@@ -200,4 +200,18 @@ requestController.delete = async function (req, res) {
   }
 };
 
+requestController.updateImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { filename } = req.file;
+    const response = await Request.findByIdAndUpdate(id, {
+      file: filename,
+    });
+    res.json(response);
+  } catch (error) {
+    res.status(500);
+    res.json(error);
+  }
+};
+
 module.exports = requestController;

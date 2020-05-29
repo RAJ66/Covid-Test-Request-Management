@@ -9,6 +9,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const sessionMiddleware = require("./middleware/session");
 const bcrypt = require("bcrypt");
+
 const generatePassCrypt = require("../src/utils/crypt");
 //Routes
 const indexRouter = require("./routes/index");
@@ -54,6 +55,9 @@ app.use(
     origin: "http://localhost:4200",
   })
 );
+
+// Setup public uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.use(logger("dev"));
 app.use(express.json());

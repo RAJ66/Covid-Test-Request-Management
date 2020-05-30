@@ -1,7 +1,10 @@
 const express = require("express");
+const multer = require("multer");
 const router = express.Router();
 const request = require("../controllers/RequestController.js");
 const authorize = require("../middleware/authorize");
+const uploadConfig = require("../utils/upload");
+const upload = multer(uploadConfig);
 
 //Get all requests
 router.get(
@@ -22,6 +25,8 @@ router.get(
 
 //Edit/Update request
 router.put("/request/:id", authorize(["Admin", "Employee"]), request.update);
+
+router.put("/request/:id/image", upload.single("image"), request.updateImage);
 
 //Delete request
 router.delete("/request/:id", authorize(["Admin", "Employee"]), request.delete);

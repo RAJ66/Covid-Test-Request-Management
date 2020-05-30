@@ -10,13 +10,31 @@
 }
 
 .content {
-  width: 50%;
-  padding: 96px;
-  background: var(--bg);
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+}
+
+.toolbar {
+  border-radius: 8px;
+}
+
+.button-container {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.information {
+  width: 50%;
+  padding-top: 50px;
+
+  padding-right: 96px;
+  padding-left: 96px;
+  padding-bottom: 96px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }

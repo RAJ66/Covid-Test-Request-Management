@@ -11,6 +11,7 @@ import { UpdateRequestPageComponent } from './pages/update-request-page/update-r
 import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/employee-requests-page.component';
 import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
 import { UpdateProfilePageComponent } from './pages/update-profile-page/update-profile-page.component';
+import { CreateRequestPageComponent } from './pages/create-request-page/create-request-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'question', component: QuestionPageComponent },
   { path: 'user', component: UserPageComponent },
+  { path: 'user/createRequest', component: CreateRequestPageComponent },
   { path: 'user/requests', component: EmployeeRequestsPageComponent },
   { path: 'user/profile', component: UserProfilePageComponent },
   { path: 'user/profile/update', component: UpdateProfilePageComponent },

@@ -30,6 +30,7 @@ import { UpdateRequestPageComponent } from './pages/update-request-page/update-r
 import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/employee-requests-page.component';
 import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
 import { UpdateProfilePageComponent } from './pages/update-profile-page/update-profile-page.component';
+import { CreateRequestPageComponent } from './pages/create-request-page/create-request-page.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UpdateProfilePageComponent } from './pages/update-profile-page/update-p
     EmployeeRequestsPageComponent,
     UserProfilePageComponent,
     UpdateProfilePageComponent,
+    CreateRequestPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,20 @@
 const mongoose = require("mongoose");
-const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const generatePassCrypt = require("../utils/crypt");
 
-var userController = {};
+const User = require("../models/User");
+
+const generatePassCrypt = require("../utils/crypt");
+const sendEmail = require("../utils/sendEmail");
+
+function sendRegistro(user) {
+  sendEmail(
+    user.email,
+    "Create User",
+    `Caro ${user.name} seu registro foi criado com sucesso.`
+  );
+}
+
+const userController = {};
 
 userController.getAll = async function (req, res) {
   try {
@@ -41,12 +52,14 @@ userController.create = async function (req, res) {
 
     if (userDB) {
       res.status(403);
-      res.json({});
+      res.json({ err: "User exist" });
     } else {
       const passwordHash = await generatePassCrypt(req.body.password);
       req.body.password = passwordHash;
 
       const result = await User.create(req.body);
+
+      sendRegistro(req.body);
       res.json({ result });
     }
   } catch (e) {

@@ -12,6 +12,7 @@ import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/em
 import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
 import { UpdateProfilePageComponent } from './pages/update-profile-page/update-profile-page.component';
 import { CreateRequestPageComponent } from './pages/create-request-page/create-request-page.component';
+import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -23,6 +24,10 @@ const routes: Routes = [
   { path: 'user/requests', component: EmployeeRequestsPageComponent },
   { path: 'user/profile', component: UserProfilePageComponent },
   { path: 'user/profile/update', component: UpdateProfilePageComponent },
+  {
+    path: 'user/profile/update/password',
+    component: ChangePasswordPageComponent,
+  },
   { path: 'employee', component: EmployeePageComponent },
   { path: 'employee/request', component: RequestPageComponent },
   { path: 'employee/request/update', component: UpdateRequestPageComponent },

@@ -4,7 +4,7 @@
     <mat-toolbar color="primary" class="toolbar">
       <h2>New Request</h2>
     </mat-toolbar>
-    <div class="information">
+    <div class="information" *ngIf="!success">
       <p>Do you belong to a risk group?</p>
       <mat-radio-group aria-label="Select an option" [(ngModel)]="riskGroup">
         <mat-radio-button value="true">Yes</mat-radio-button>
@@ -26,6 +26,15 @@
 
       <button mat-raised-button color="primary" (click)="submitRequest()">
         Submit
+      </button>
+    </div>
+    <div *ngIf="success" class="successMessage">
+      <h2>
+        Your request was submited. Check your requests and you email for any
+        updates.
+      </h2>
+      <button mat-raised-button color="primary" routerLink="/user/requests">
+        Go Back
       </button>
     </div>
   </div>

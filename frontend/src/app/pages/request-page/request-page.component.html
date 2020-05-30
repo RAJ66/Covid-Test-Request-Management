@@ -3,13 +3,10 @@
 
 <div class="request-container">
   <div class="content" *ngIf="request">
-    <div class="button-back">
-      <button mat-raised-button color="primary" (click)="goBack()">
-        Go Back
-      </button>
-    </div>
-    <div class="information">
+    <mat-toolbar color="primary" class="toolbar">
       <h2>Request {{ information }}</h2>
+    </mat-toolbar>
+    <div class="information">
       <p *ngIf="request.employeeId; else noId">
         Employee ID: {{ request.employeeId }}
       </p>
@@ -37,12 +34,16 @@
       <p>Request State: {{ request.requestState }}</p>
       <p>User State: {{ request.userState }}</p>
 
-      <div class="button-container" *ngIf="user && user.role === roleEmployee">
+      <div class="button-container" *ngIf="user">
         <button
           mat-raised-button
           color="primary"
           routerLink="/employee/request/update"
-          *ngIf="request.employeeId == user._id && !requestState"
+          *ngIf="
+            request.employeeId == user._id &&
+            !requestState &&
+            user.role === roleEmployee
+          "
         >
           Update
         </button>
@@ -50,11 +51,17 @@
           mat-raised-button
           color="primary"
           (click)="claimRequest()"
-          *ngIf="!request.employeeId"
+          *ngIf="!request.employeeId && user.role === roleEmployee"
         >
           Claim Request
         </button>
+        <button mat-raised-button color="primary" (click)="goBack()">
+          Go Back
+        </button>
       </div>
     </div>
+  </div>
+  <div *ngIf="!request">
+    <mat-spinner></mat-spinner>
   </div>
 </div>

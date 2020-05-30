@@ -16,6 +16,7 @@ export class RequestPageComponent implements OnInit {
   requestState: boolean;
 
   roleEmployee: string = 'Employee';
+  roleUser: string = 'User';
 
   constructor(
     public data: DataService,
@@ -47,6 +48,10 @@ export class RequestPageComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/employee/requests']);
+    if (this.user.role === this.roleEmployee) {
+      this.router.navigate(['/employee/requests']);
+    } else {
+      this.router.navigate(['/user/requests']);
+    }
   }
 }

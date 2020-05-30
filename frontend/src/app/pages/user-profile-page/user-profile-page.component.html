@@ -11,7 +11,11 @@
       <p>Birth Date: {{ user.birthDate }}</p>
 
       <div class="button-container">
-        <button mat-raised-button color="primary">
+        <button
+          mat-raised-button
+          color="primary"
+          routerLink="/user/profile/update"
+        >
           Update
         </button>
         <button mat-raised-button color="primary" routerLink="/user/">

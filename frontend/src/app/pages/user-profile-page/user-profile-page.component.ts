@@ -16,7 +16,6 @@ export class UserProfilePageComponent implements OnInit {
       .getUsers(`nif=${JSON.parse(localStorage.getItem('user')).nif}`)
       .subscribe((res) => {
         this.user = res.userList[0];
-        console.log(this.user);
       });
   }
 }

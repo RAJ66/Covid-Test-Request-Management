@@ -212,6 +212,11 @@ requestController.update = async function (req, res) {
         const updatedRequest = await Request.findByIdAndUpdate(id, save);
         res.json({ updatedRequest });
       }
+    }
+    if (!updated && !old.employeeId && req.body.employeeId) {
+      save.employeeId = req.body.employeeId;
+      const updatedRequest = await Request.findByIdAndUpdate(id, save);
+      res.json({ updatedRequest });
     } else {
       // IMPORTANT FIX
       //res.status(500);

@@ -4,7 +4,7 @@ const user = require("../controllers/UserController.js");
 const authorize = require("../middleware/authorize");
 
 //Get all users
-router.get("/users", authorize(["Admin", "Employee"]), user.getAll);
+router.get("/users", authorize(["Admin", "Employee", "User"]), user.getAll);
 
 //Get a single user by id
 router.get("/user/:id", authorize(["Admin", "Employee", "User"]), user.getOne);

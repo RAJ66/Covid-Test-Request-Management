@@ -50,6 +50,10 @@ requestController.getAll = async function (req, res) {
       const employee = await User.findOne({ nif: req.query.employeeNif });
       filters.employeeId = employee._id;
     }
+    if (req.query.userNif) {
+      const user = await User.findOne({ nif: req.query.userNif });
+      filters.userId = user._id;
+    }
 
     const requestList = await Request.find(filters);
     res.json({ requestList });

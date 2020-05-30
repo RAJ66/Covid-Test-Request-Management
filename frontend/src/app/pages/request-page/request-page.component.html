@@ -1,4 +1,6 @@
-<app-header-employee></app-header-employee>
+<app-header-employee *ngIf="userRole === roleEmployee"></app-header-employee>
+<app-header-user *ngIf="userRole === roleUser"></app-header-user>
+
 <div class="request-container">
   <div class="content" *ngIf="request">
     <mat-toolbar color="primary" class="toolbar">
@@ -32,12 +34,16 @@
       <p>Request State: {{ request.requestState }}</p>
       <p>User State: {{ request.userState }}</p>
 
-      <div class="button-container" *ngIf="employee">
+      <div class="button-container" *ngIf="user">
         <button
           mat-raised-button
           color="primary"
           routerLink="/employee/request/update"
-          *ngIf="request.employeeId == employee._id && !requestState"
+          *ngIf="
+            request.employeeId == user._id &&
+            !requestState &&
+            user.role === roleEmployee
+          "
         >
           Update
         </button>
@@ -45,7 +51,7 @@
           mat-raised-button
           color="primary"
           (click)="claimRequest()"
-          *ngIf="!request.employeeId"
+          *ngIf="!request.employeeId && user.role === roleEmployee"
         >
           Claim Request
         </button>

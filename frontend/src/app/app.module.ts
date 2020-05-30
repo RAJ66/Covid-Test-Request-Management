@@ -12,7 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KpiComponent } from './components/kpi/kpi.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +28,9 @@ import { HeaderEmployeeComponent } from './components/header-employee/header-emp
 import { RequestPageComponent } from './pages/request-page/request-page.component';
 import { UpdateRequestPageComponent } from './pages/update-request-page/update-request-page.component';
 import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/employee-requests-page.component';
+import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
+import { UpdateProfilePageComponent } from './pages/update-profile-page/update-profile-page.component';
+import { CreateRequestPageComponent } from './pages/create-request-page/create-request-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/em
     RequestPageComponent,
     UpdateRequestPageComponent,
     EmployeeRequestsPageComponent,
+    UserProfilePageComponent,
+    UpdateProfilePageComponent,
+    CreateRequestPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +65,7 @@ import { EmployeeRequestsPageComponent } from './pages/employee-requests-page/em
     FormsModule,
     MatFormFieldModule,
     DemoMaterialModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,8 +12,12 @@ import { Router } from '@angular/router';
 export class RequestPageComponent implements OnInit {
   information: string;
   request: any;
-  employee: any;
+  user: any;
   requestState: boolean;
+
+  userRole = JSON.parse(localStorage.getItem('user')).role;
+  roleEmployee: string = 'Employee';
+  roleUser: string = 'User';
 
   constructor(
     public data: DataService,
@@ -35,21 +39,20 @@ export class RequestPageComponent implements OnInit {
     this.users
       .getUsers(`nif=${JSON.parse(localStorage.getItem('user')).nif}`)
       .subscribe((res) => {
-        this.employee = res.userList[0];
+        this.user = res.userList[0];
       });
   }
 
   claimRequest() {
-    this.users
-      .getUsers(`nif=${JSON.parse(localStorage.getItem('user')).nif}`)
-      .subscribe((res) => {
-        this.employee = res.userList[0];
-        this.request.employeeId = this.employee._id;
-        this.requests.updateRequest(this.request._id, this.request).subscribe();
-      });
+    this.request.employeeId = this.user._id;
+    this.requests.updateRequest(this.request._id, this.request).subscribe();
   }
 
   goBack() {
-    this.router.navigate(['/employee/requests']);
+    if (this.user.role === this.roleEmployee) {
+      this.router.navigate(['/employee/requests']);
+    } else {
+      this.router.navigate(['/user/requests']);
+    }
   }
 }

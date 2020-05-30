@@ -1,0 +1,81 @@
+<app-header-user></app-header-user>
+<div class="update-profile-container">
+  <div class="content" *ngIf="user">
+    <mat-toolbar color="primary" class="toolbar">
+      <h2>Your Profile</h2>
+    </mat-toolbar>
+    <div class="information">
+      <form>
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Your name"
+            [value]="user.name"
+            [(ngModel)]="user.name"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [formControl]="emailFormControl"
+            [errorStateMatcher]="matcher"
+            placeholder="Ex. pat@example.com"
+            [(ngModel)]="user.email"
+          />
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Contact</mat-label>
+          <input
+            matInput
+            placeholder="Your contact"
+            [value]="user.contact"
+            [(ngModel)]="user.contact"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Birth Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            [value]="user.birthDate"
+            [(ngModel)]="user.birthDate"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </form>
+
+      <button mat-raised-button color="primary" (click)="updateProfile()">
+        Confirm
+      </button>
+      <button mat-raised-button color="primary" routerLink="/user/profile">
+        Cancel
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!user">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

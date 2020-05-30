@@ -15,6 +15,7 @@ export class RequestPageComponent implements OnInit {
   user: any;
   requestState: boolean;
 
+  userRole = JSON.parse(localStorage.getItem('user')).role;
   roleEmployee: string = 'Employee';
   roleUser: string = 'User';
 

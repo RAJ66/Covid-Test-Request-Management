@@ -5,6 +5,23 @@ const Request = require("../models/Request");
 const User = require("../models/User");
 
 const generateUniqueId = require("../utils/generateUniqueId");
+const sendEmail = require("../utils/sendEmail");
+
+function sendDate(user, date) {
+  sendEmail(
+    user.email,
+    "Request Date",
+    `Caro ${user.name} seu teste ficou marcado para dia ${date}.`
+  );
+}
+
+function sendResult(user, result) {
+  sendEmail(
+    user.email,
+    "Result Request",
+    `Caro ${user.name} era para informar que o resultado do seu teste foi ${result}.`
+  );
+}
 
 const requestController = {};
 
@@ -123,66 +140,83 @@ requestController.update = async function (req, res) {
     const testResultPositive = "Positive";
     const testResultNegative = "Negative";
 
-    await Request.findByIdAndUpdate(id, req.body);
+    const save = {};
+    let updated = false;
+    const old = await Request.findById(id).populate("userId");
+    console.log(old.userId);
 
-    const request = await Request.findById(id);
+    if (old.requestState == requestDone || old.userState == userInfected) {
+      updated = true;
+    }
 
-    if (
-      (request.firstTestResult == testResultPending &&
-        request.secondTestResult != testResultPending) ||
-      (request.firstTestDate == undefined &&
-        request.secondTestDate != undefined)
-    ) {
-      await Request.findByIdAndUpdate(id, {
-        secondTestResult: testResultPending,
-        secondTestDate: undefined,
-      });
-
-      res.json({});
-    } else if (
-      request.firstTestResult == testResultPositive ||
-      request.secondTestResult == testResultPositive
-    ) {
-      await Request.findByIdAndUpdate(id, {
-        userState: userInfected,
-        requestState: requestDone,
-      });
-
-      const updatedRequest = await Request.findById(id);
-      res.json({ updatedRequest });
-    } else if (
-      request.firstTestResult == testResultNegative &&
-      request.secondTestResult == testResultNegative
-    ) {
-      await Request.findByIdAndUpdate(id, {
-        userState: userNotInfected,
-        requestState: requestDone,
-      });
-
-      const updatedRequest = await Request.findById(id);
-      res.json({ updatedRequest });
-    } else if (request.secondTestResult == testResultPending) {
-      if (request.firstTestResult == testResultNegative) {
-        const secondDate = moment(request.firstTestDate)
-          .add(2, "days")
-          .format();
-
-        await Request.findByIdAndUpdate(id, {
-          requestState: requestInProgress,
-          secondTestDate: secondDate,
-        });
-      } else {
-        await Request.findByIdAndUpdate(id, {
-          requestState: requestInProgress,
-        });
-      }
-
-      const updatedRequest = await Request.findById(id);
+    //meter primeira data
+    if (!updated && !old.firstTestDate && req.body.firstTestDate) {
+      save.firstTestDate = req.body.firstTestDate;
+      const updatedRequest = await Request.findByIdAndUpdate(id, save);
+      updated = true;
+      sendDate(old.userId, req.body.firstTestDate);
       res.json({ updatedRequest });
     }
+    //meter primeiro resultado
+    if (
+      !updated &&
+      old.firstTestResult == testResultPending &&
+      req.body.firstTestResult &&
+      old.firstTestDate
+    ) {
+      updated = true;
+      save.firstTestResult = req.body.firstTestResult;
+      sendResult(old.userId, req.body.firstTestResult);
+
+      //Se o primeiro resultado for positivo
+      if (save.firstTestResult == testResultPositive) {
+        save.userState = userInfected;
+        save.requestState = requestDone;
+        const updatedRequest = await Request.findByIdAndUpdate(id, save);
+        //sendDate(old.us,)
+        res.json({ updatedRequest });
+      } else {
+        //Se o primeiro resultado for negativo
+        //Colocar segunda data automaticamente
+        const secondDate = moment(old.firstTestDate).add(2, "days").format();
+
+        save.secondTestDate = secondDate;
+        save.requestState = requestInProgress;
+        const updatedRequest = await Request.findByIdAndUpdate(id, save);
+        sendDate(old.userId, secondDate);
+        res.json({ updatedRequest });
+      }
+    }
+    //meter segundo resultado
+    if (
+      !updated &&
+      old.secondTestResult == testResultPending &&
+      req.body.secondTestResult &&
+      old.firstTestResult !== testResultPending
+    ) {
+      save.secondTestResult = req.body.secondTestResult;
+      save.requestState = requestDone;
+
+      sendResult(old.userId, req.body.secondTestResult);
+      //se o segundo resultado for positivo
+      if (save.secondTestResult == testResultPositive) {
+        save.userState = userInfected;
+        const updatedRequest = await Request.findByIdAndUpdate(id, save);
+        res.json({ updatedRequest });
+      } else {
+        save.userState = userNotInfected;
+        const updatedRequest = await Request.findByIdAndUpdate(id, save);
+        res.json({ updatedRequest });
+      }
+    } else {
+      // IMPORTANT FIX
+      //res.status(500);
+      //res.json({ err: "Somehting went wrong with the request." });
+    }
   } catch (e) {
-    res.status(500);
-    res.json({ err: e });
+    // IMPORTANT FIX
+    // res.status(500);
+    // res.json({ err: e });
   }
 };
 

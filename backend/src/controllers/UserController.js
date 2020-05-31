@@ -73,8 +73,29 @@ userController.update = async function (req, res) {
   const user = await User.findById(id);
 
   if (user) {
-    const result = await User.findByIdAndUpdate(id, req.body);
-    res.json({ result });
+    const oldUser = await User.findById(id);
+    const oldPassword = oldUser.password;
+
+    if (req.body.newPassword && req.body.oldPassword) {
+      bcrypt.compare(req.body.oldPassword, oldPassword, async function (
+        err,
+        result
+      ) {
+        if (result) {
+          const passwordHash = await generatePassCrypt(req.body.newPassword);
+          const result = await User.findByIdAndUpdate(id, {
+            password: passwordHash,
+          });
+          res.json({ result });
+        } else {
+          res.status(401);
+          res.json({ err: "Password incorrect" });
+        }
+      });
+    } else {
+      const result = await User.findByIdAndUpdate(id, req.body);
+      res.json({ result });
+    }
   } else {
     res.status(404);
     res.json({});

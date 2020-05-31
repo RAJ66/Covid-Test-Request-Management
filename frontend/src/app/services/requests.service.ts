@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
 
 import { environment } from './../../environments/environment';
 
 const API_URL = environment.apiUrl;
 const httpOptions = environment.headers;
-
 @Injectable({
   providedIn: 'root',
 })
@@ -37,6 +35,12 @@ export class RequestsService {
       newInformation,
       httpOptions
     );
+  }
+
+  updateRequestFile(requestId: string, newInformation: any): Observable<any> {
+    console.log(requestId, newInformation);
+
+    return this.http.put(`${API_URL}request/${requestId}/file`, newInformation);
   }
 
   deleteRequest(requestId: string): Observable<any> {

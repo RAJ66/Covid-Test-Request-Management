@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { RequestsService } from '../../services/requests.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-request-page',
@@ -12,6 +12,8 @@ export class UpdateRequestPageComponent implements OnInit {
   information: string;
   request: any;
   testResultPending: string = 'Pending';
+
+  files: any = {};
 
   equal: boolean;
 
@@ -32,8 +34,23 @@ export class UpdateRequestPageComponent implements OnInit {
     });
   }
 
+  selectFile(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.files = file;
+    }
+  }
+
   updateRequest(event) {
     event.preventDefault();
+    if (this.files != {}) {
+      const formData = new FormData();
+      formData.append('file', this.files);
+
+      this.requests
+        .updateRequestFile(this.request._id, formData)
+        .subscribe(() => {});
+    }
     this.requests
       .updateRequest(this.request._id, this.request)
       .subscribe(() => {

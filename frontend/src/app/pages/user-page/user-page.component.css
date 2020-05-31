@@ -26,21 +26,12 @@
   width: 100%;
 }
 
-.cards1 {
-  padding-top: 30px;
-  width: 90%;
-  max-width: 980px;
-  margin: auto;
-}
-
-.cards2 {
-  padding-top: 30px;
-  width: 90%;
-  max-width: 980px;
-  margin: auto;
-}
-
 mat-expansion-panel {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.information {
+  margin-top: 55px;
+  width: 100%;
 }

@@ -26,7 +26,7 @@ router.get(
 //Edit/Update request
 router.put("/request/:id", authorize(["Admin", "Employee"]), request.update);
 
-router.put("/request/:id/image", upload.single("image"), request.updateImage);
+router.put("/request/:id/file", upload.single("file"), request.updateImage);
 
 //Delete request
 router.delete("/request/:id", authorize(["Admin", "Employee"]), request.delete);

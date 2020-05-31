@@ -13,7 +13,7 @@ export class UpdateRequestPageComponent implements OnInit {
   request: any;
   testResultPending: string = 'Pending';
 
-  images: any = {};
+  files: any = {};
 
   equal: boolean;
 
@@ -34,18 +34,18 @@ export class UpdateRequestPageComponent implements OnInit {
     });
   }
 
-  selectImage(event) {
+  selectFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.images = file;
+      this.files = file;
     }
   }
 
   updateRequest(event) {
     event.preventDefault();
-    if (this.images != {}) {
+    if (this.files != {}) {
       const formData = new FormData();
-      formData.append('image', this.images);
+      formData.append('file', this.files);
 
       this.requests
         .updateRequestFile(this.request._id, formData)

@@ -40,10 +40,7 @@ export class RequestsService {
   updateRequestFile(requestId: string, newInformation: any): Observable<any> {
     console.log(requestId, newInformation);
 
-    return this.http.put(
-      `${API_URL}request/${requestId}/image`,
-      newInformation
-    );
+    return this.http.put(`${API_URL}request/${requestId}/file`, newInformation);
   }
 
   deleteRequest(requestId: string): Observable<any> {

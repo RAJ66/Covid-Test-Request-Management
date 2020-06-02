@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from './../../environments/environment';
@@ -41,6 +41,15 @@ export class RequestsService {
     console.log(requestId, newInformation);
 
     return this.http.put(`${API_URL}request/${requestId}/file`, newInformation);
+  }
+
+  getFile(fileId): Observable<any> {
+    return this.http.get(`http://localhost:3333/uploads/${fileId}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/octet-stream',
+      }),
+      responseType: 'blob',
+    });
   }
 
   deleteRequest(requestId: string): Observable<any> {

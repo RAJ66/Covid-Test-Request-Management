@@ -149,7 +149,7 @@ requestController.update = async function (req, res) {
     const old = await Request.findById(id).populate("userId");
     console.log(old.userId);
 
-    if (old.requestState == requestDone || old.userState == userInfected) {
+    if (old.requestState == requestDone) {
       updated = true;
     }
 

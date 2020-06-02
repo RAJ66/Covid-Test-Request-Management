@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import { RequestsService } from '../../services/requests.service';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-request-page',
@@ -14,6 +15,7 @@ export class RequestPageComponent implements OnInit {
   request: any;
   user: any;
   requestState: boolean;
+  file: any;
 
   userRole = JSON.parse(localStorage.getItem('user')).role;
   roleEmployee: string = 'Employee';
@@ -54,5 +56,11 @@ export class RequestPageComponent implements OnInit {
     } else {
       this.router.navigate(['/user/requests']);
     }
+  }
+
+  downloadFile() {
+    this.requests.getFile(this.request.file).subscribe((res) => {
+      saveAs(res, `${this.request.file}`);
+    });
   }
 }

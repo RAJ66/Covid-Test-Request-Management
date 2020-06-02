@@ -2,11 +2,15 @@
 <div class="create-request-container">
   <div class="content">
     <mat-toolbar color="primary" class="toolbar">
-      <h2>New Request</h2>
+      <h2>Create new Request</h2>
     </mat-toolbar>
     <div class="information" *ngIf="!success">
       <p>Do you belong to a risk group?</p>
-      <mat-radio-group aria-label="Select an option" [(ngModel)]="riskGroup">
+      <mat-radio-group
+        aria-label="Select an option"
+        [(ngModel)]="riskGroup"
+        class="radio"
+      >
         <mat-radio-button value="true">Yes</mat-radio-button>
         <mat-radio-button value="false">No</mat-radio-button>
       </mat-radio-group>
@@ -14,12 +18,17 @@
       <mat-radio-group
         aria-label="Select an option"
         [(ngModel)]="riskProfession"
+        class="radio"
       >
         <mat-radio-button value="true">Yes</mat-radio-button>
         <mat-radio-button value="false">No</mat-radio-button>
       </mat-radio-group>
       <p>Were you redirected by the line saude24?</p>
-      <mat-radio-group aria-label="Select an option" [(ngModel)]="saude24">
+      <mat-radio-group
+        aria-label="Select an option"
+        [(ngModel)]="saude24"
+        class="radio"
+      >
         <mat-radio-button value="true">Yes</mat-radio-button>
         <mat-radio-button value="false">No</mat-radio-button>
       </mat-radio-group>

@@ -69,12 +69,14 @@
 
       <a routerLink="/user/profile/update/password">Change Password</a>
 
-      <button mat-raised-button color="primary" (click)="updateProfile()">
-        Confirm
-      </button>
-      <button mat-raised-button color="primary" routerLink="/user/profile">
-        Cancel
-      </button>
+      <div class="buttons">
+        <button mat-raised-button color="primary" (click)="updateProfile()">
+          Confirm
+        </button>
+        <button mat-raised-button color="primary" routerLink="/user/profile">
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
   <div *ngIf="!user">

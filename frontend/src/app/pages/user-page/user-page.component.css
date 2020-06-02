@@ -1,6 +1,6 @@
 .user-page-container {
   width: 100%;
-  max-width: 1128px;
+  max-width: 980px;
   height: 89vh;
   margin: 0 auto;
 
@@ -34,4 +34,15 @@ mat-expansion-panel {
 .information {
   margin-top: 55px;
   width: 100%;
+}
+
+.toolbar {
+  border-radius: 0px;
+  width: 100%;
+}
+
+.toolbar-title {
+  width: 90%;
+  max-width: 980px;
+  margin: auto;
 }

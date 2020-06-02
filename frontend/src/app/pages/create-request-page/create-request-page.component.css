@@ -31,7 +31,7 @@
 
   padding-right: 96px;
   padding-left: 96px;
-  padding-bottom: 96px;
+  padding-bottom: 50px;
 
   display: flex;
   flex-direction: column;
@@ -55,4 +55,13 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+}
+
+.radio {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 15px;
 }

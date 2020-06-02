@@ -43,3 +43,12 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+.buttons {
+  margin-top: 10px;
+}
+
+.buttons * {
+  margin-right: 5px;
+  margin-left: 5px;
+}

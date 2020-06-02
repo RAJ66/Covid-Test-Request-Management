@@ -1,8 +1,8 @@
 <app-header-user></app-header-user>
+<mat-toolbar color="primary" class="toolbar">
+  <h2 class="toolbar-title">Welcome to Centro Regional de Análises</h2>
+</mat-toolbar>
 <div class="user-page-container">
-  <mat-toolbar color="primary" class="toolbar">
-    <h2>Welcome to Centro Regional de Análises</h2>
-  </mat-toolbar>
   <div class="description">
     <p>
       This iniciative seeks to help the local government control the spread of
@@ -12,7 +12,9 @@
       should expect the system will work.
     </p>
   </div>
-  <h2>How it works</h2>
+
+  <h2 class="title">How it works</h2>
+  <hr />
   <div class="content">
     <div class="card1">
       <mat-expansion-panel>
@@ -135,21 +137,15 @@
     </div>
   </div>
   <div class="information">
-    <p>
-      And always make sure you get you information about the <b>COVID-19</b> in
-      a reliable information source, such as:
-    </p>
-    <p>
-      <a href="https://www.who.int/"
-        >WHO - World Health Organization
-        <img src="../../../assets/WHO.png" alt="WHO" width="30" height="30"
-      /></a>
-    </p>
-    <p>
-      <a href="https://www.dgs.pt/"
-        >DGS - Direção Geral da Saúde
-        <img src="../../../assets/DGS.png" alt="DGS" width="150" height="30"
-      /></a>
-    </p>
+    <div class="information-content">
+      <p>
+        And always make sure you get you information about the
+        <b>COVID-19</b> in a reliable information source, such as:
+      </p>
+      <div class="link">
+        <a href="https://www.who.int/">WHO - World Health Organization </a>
+        <a href="https://www.dgs.pt/">DGS - Direção Geral da Saúde </a>
+      </div>
+    </div>
   </div>
 </div>

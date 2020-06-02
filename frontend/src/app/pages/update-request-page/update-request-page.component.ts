@@ -14,6 +14,7 @@ export class UpdateRequestPageComponent implements OnInit {
   testResultPending: string = 'Pending';
 
   files: any = {};
+  fileChoosen: boolean = false;
 
   equal: boolean;
 
@@ -38,18 +39,22 @@ export class UpdateRequestPageComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.files = file;
+      this.fileChoosen = true;
     }
   }
 
   updateRequest(event) {
     event.preventDefault();
-    if (this.files != {}) {
+
+    if (this.fileChoosen) {
       const formData = new FormData();
       formData.append('file', this.files);
 
       this.requests
         .updateRequestFile(this.request._id, formData)
-        .subscribe(() => {});
+        .subscribe(() => {
+          this.router.navigate(['/employee/request']);
+        });
     }
     this.requests
       .updateRequest(this.request._id, this.request)

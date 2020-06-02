@@ -34,6 +34,15 @@
       <p>Request State: {{ request.requestState }}</p>
       <p>User State: {{ request.userState }}</p>
 
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="downloadFile()"
+        *ngIf="request.file"
+      >
+        Download File
+      </button>
+
       <div class="button-container" *ngIf="user">
         <button
           mat-raised-button

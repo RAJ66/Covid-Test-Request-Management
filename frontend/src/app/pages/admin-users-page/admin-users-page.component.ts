@@ -11,6 +11,7 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./admin-users-page.component.css'],
 })
 export class AdminUsersPageComponent implements OnInit {
+  allUsers: any = [];
   dataSource: any;
   displayedColumns: string[] = [
     'nif',
@@ -29,7 +30,22 @@ export class AdminUsersPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.users.getUsers(null).subscribe((res: any) => {
-      this.dataSource = new MatTableDataSource(res.userList);
+      let found: boolean = false;
+      let index: number;
+      this.allUsers = res.userList;
+
+      for (let i = 0; i < this.allUsers.length && !found; i++) {
+        if (
+          this.allUsers[i].nif === JSON.parse(localStorage.getItem('user')).nif
+        ) {
+          index = i;
+          found = true;
+        }
+      }
+      //To remove the Admin Logged
+      this.allUsers.splice(index, 1);
+
+      this.dataSource = new MatTableDataSource(this.allUsers);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });

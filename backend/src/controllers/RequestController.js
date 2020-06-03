@@ -257,7 +257,7 @@ requestController.updateImage = async (req, res) => {
   }
 };
 
-const groupEventsPerDay = () => {
+const groupFirstTestPerDay = () => {
   return Request.aggregate([
     {
       $group: {
@@ -271,7 +271,34 @@ const groupEventsPerDay = () => {
     {
       $project: {
         date: "$_id",
-        totalEvents: "$total",
+        totalTests: "$total",
+        _id: false,
+      },
+    },
+    {
+      $sort: { date: 1 },
+    },
+  ]).catch((e) => {
+    console.log(e);
+    return [];
+  });
+};
+
+const groupSecondTestPerDay = () => {
+  return Request.aggregate([
+    {
+      $group: {
+        _id: {
+          // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
+          $dateToString: { format: "%Y-%m-%d", date: "$secondTestDate" },
+        },
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        date: "$_id",
+        totalTests: "$total",
         _id: false,
       },
     },
@@ -285,23 +312,32 @@ const groupEventsPerDay = () => {
 };
 
 requestController.status = async (req, res) => {
-  const [perDay] = await Promise.all([
-    groupEventsPerDay(),
+  const [firstTestsPerDay, secondTestsPerDay] = await Promise.all([
+    groupFirstTestPerDay(),
+    groupSecondTestPerDay(),
     //countEvents(),
   ]);
-  let dates = [];
-  let values = [];
-  console.log(perDay);
-  for (data in perDay) {
-    dates.push(perDay[data].date);
-    values.push(perDay[data].totalEvents);
+  //First Tests
+  let firstDates = [];
+  let firstValues = [];
+  for (data in firstTestsPerDay) {
+    firstDates.push(firstTestsPerDay[data].date);
+    firstValues.push(firstTestsPerDay[data].totalTests);
   }
-  console.log(dates);
-  console.log(values);
+
+  //Second Tests
+  let secondDates = [];
+  let secondValues = [];
+  for (data in secondTestsPerDay) {
+    secondDates.push(secondTestsPerDay[data].date);
+    secondValues.push(secondTestsPerDay[data].totalTests);
+  }
 
   res.json({
-    dates,
-    values,
+    firstDates,
+    firstValues,
+    secondDates,
+    secondValues,
   });
 };
 

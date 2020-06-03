@@ -48,7 +48,7 @@ export class AdminUsersPageComponent implements OnInit {
     }
   }
 
-  showUser(userId) {
-    this.data.changeinformation(userId);
+  showUser(userNif) {
+    this.data.changeinformation(userNif);
   }
 }

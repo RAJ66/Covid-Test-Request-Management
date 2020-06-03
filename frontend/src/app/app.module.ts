@@ -34,6 +34,7 @@ import { CreateRequestPageComponent } from './pages/create-request-page/create-r
 import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { AdminUsersPageComponent } from './pages/admin-users-page/admin-users-page.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     ChangePasswordPageComponent,
     HeaderAdminComponent,
     AdminPageComponent,
+    AdminUsersPageComponent,
   ],
   imports: [
     BrowserModule,

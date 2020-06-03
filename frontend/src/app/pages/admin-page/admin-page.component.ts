@@ -29,7 +29,7 @@ export class AdminPageComponent implements OnInit {
         }
       }
 
-      for (let i = 0; i < this.firstDates.length; i++) {
+      for (let i = 0; i < this.secondDates.length; i++) {
         this.secondDates[i] = "'" + this.secondDates[i] + "'";
 
         if (this.secondDates[i] === "'null'") {

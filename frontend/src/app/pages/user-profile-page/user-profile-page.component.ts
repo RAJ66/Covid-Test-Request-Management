@@ -11,10 +11,12 @@ import { Router } from '@angular/router';
 export class UserProfilePageComponent implements OnInit {
   information: any;
 
+  userLogged: any = JSON.parse(localStorage.getItem('user'));
   user: any;
 
   roleUser: string = 'User';
   roleAdmin: string = 'Admin';
+  roleEmployee: string = 'Employee';
 
   constructor(
     public users: UsersService,
@@ -33,10 +35,12 @@ export class UserProfilePageComponent implements OnInit {
   }
 
   goBack() {
-    if (this.user.role === 'User') {
+    if (this.userLogged.role === 'User') {
       this.router.navigate(['/user/']);
-    } else {
+    } else if (this.userLogged.nif === this.user.nif) {
       this.router.navigate(['/admin/']);
+    } else {
+      this.router.navigate(['/admin/users/']);
     }
   }
 }

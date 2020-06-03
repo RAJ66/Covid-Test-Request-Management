@@ -26,7 +26,7 @@ export class LoginPageComponent implements OnInit {
       const user = JSON.parse(localStorage.getItem('user'));
       console.log(user.role);
       if (user.role === 'Admin') {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/admin']);
       } else if (user.role === 'Employee') {
         this.router.navigate(['employee']);
       } else {

@@ -13,6 +13,7 @@ import { UserProfilePageComponent } from './pages/user-profile-page/user-profile
 import { UpdateProfilePageComponent } from './pages/update-profile-page/update-profile-page.component';
 import { CreateRequestPageComponent } from './pages/create-request-page/create-request-page.component';
 import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -32,6 +33,8 @@ const routes: Routes = [
   { path: 'employee/request', component: RequestPageComponent },
   { path: 'employee/request/update', component: UpdateRequestPageComponent },
   { path: 'employee/requests', component: EmployeeRequestsPageComponent },
+  { path: 'admin', component: AdminPageComponent },
+  { path: 'admin/profile', component: UserProfilePageComponent },
   { path: '**', component: HomePageComponent },
 ];
 

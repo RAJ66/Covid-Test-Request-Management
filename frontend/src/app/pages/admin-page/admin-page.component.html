@@ -1,1 +1,32 @@
-<p>admin-page works!</p>
+<app-header-admin></app-header-admin>
+<div class="container">
+  <div class="firstTests">
+    <mat-card class="firstTestsCard">
+      <mat-toolbar color="primary" class="toolbar">
+        <h2>First Tests Per Day</h2>
+      </mat-toolbar>
+      <img
+        src="https://quickchart.io/chart?c={type:'line',data:{labels:[{{
+          firstDates
+        }}], datasets:[{label:'Tests', data:[{{
+          firstValues
+        }}], fill:false,borderColor:'blue'}]}}"
+      />
+    </mat-card>
+  </div>
+
+  <div class="secondTests">
+    <mat-card class="secondTestsCard">
+      <mat-toolbar color="primary" class="toolbar">
+        <h2>Second Tests Per Day</h2>
+      </mat-toolbar>
+      <img
+        src="https://quickchart.io/chart?c={type:'line',data:{labels:[{{
+          secondDates
+        }}], datasets:[{label:'Tests', data:[{{
+          secondValues
+        }}], fill:false,borderColor:'green'}]}}"
+      />
+    </mat-card>
+  </div>
+</div>

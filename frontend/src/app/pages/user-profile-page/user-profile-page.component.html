@@ -16,7 +16,7 @@
           mat-raised-button
           color="primary"
           routerLink="/user/profile/update"
-          *ngIf="user.role === roleEmployee"
+          *ngIf="user.role === roleEmployee || user.nif === userLogged.nif"
         >
           Update
         </button>

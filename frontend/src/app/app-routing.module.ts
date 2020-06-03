@@ -35,6 +35,7 @@ const routes: Routes = [
   { path: 'employee/requests', component: EmployeeRequestsPageComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'admin/profile', component: UserProfilePageComponent },
+  { path: 'admin/registerEmployee', component: RegisterPageComponent },
   { path: '**', component: HomePageComponent },
 ];
 

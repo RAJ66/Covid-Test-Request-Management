@@ -99,3 +99,16 @@
 .register-container .content section button:hover {
   filter: brightness(90%);
 }
+
+.successMessage {
+  padding-top: 50px;
+
+  padding-right: 96px;
+  padding-left: 96px;
+  padding-bottom: 96px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}

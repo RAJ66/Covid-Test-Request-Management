@@ -31,4 +31,10 @@ router.put("/request/:id/file", upload.single("file"), request.updateImage);
 //Delete request
 router.delete("/request/:id", authorize(["Admin", "Employee"]), request.delete);
 
+//status
+router.get(
+  "/request_status/",
+
+  request.status
+);
 module.exports = router;

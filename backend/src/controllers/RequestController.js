@@ -257,4 +257,52 @@ requestController.updateImage = async (req, res) => {
   }
 };
 
+const groupEventsPerDay = () => {
+  return Request.aggregate([
+    {
+      $group: {
+        _id: {
+          // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
+          $dateToString: { format: "%Y-%m-%d", date: "$firstTestDate" },
+        },
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        date: "$_id",
+        totalEvents: "$total",
+        _id: false,
+      },
+    },
+    {
+      $sort: { date: 1 },
+    },
+  ]).catch((e) => {
+    console.log(e);
+    return [];
+  });
+};
+
+requestController.status = async (req, res) => {
+  const [perDay] = await Promise.all([
+    groupEventsPerDay(),
+    //countEvents(),
+  ]);
+  let dates = [];
+  let values = [];
+  console.log(perDay);
+  for (data in perDay) {
+    dates.push(perDay[data].date);
+    values.push(perDay[data].totalEvents);
+  }
+  console.log(dates);
+  console.log(values);
+
+  res.json({
+    dates,
+    values,
+  });
+};
+
 module.exports = requestController;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile-page',
@@ -9,7 +10,7 @@ import { UsersService } from '../../services/users.service';
 export class UserProfilePageComponent implements OnInit {
   user: any;
 
-  constructor(public users: UsersService) {}
+  constructor(public users: UsersService, public router: Router) {}
 
   ngOnInit(): void {
     this.users
@@ -17,5 +18,13 @@ export class UserProfilePageComponent implements OnInit {
       .subscribe((res) => {
         this.user = res.userList[0];
       });
+  }
+
+  goBack() {
+    if (this.user.role === 'User') {
+      this.router.navigate(['/user/']);
+    } else {
+      this.router.navigate(['/admin/']);
+    }
   }
 }

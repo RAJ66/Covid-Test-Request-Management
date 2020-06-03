@@ -55,4 +55,8 @@ export class RequestsService {
   deleteRequest(requestId: string): Observable<any> {
     return this.http.delete(`${API_URL}request/${requestId}`, httpOptions);
   }
+
+  requestsStats(): Observable<any> {
+    return this.http.get(`${API_URL}request_status`, httpOptions);
+  }
 }

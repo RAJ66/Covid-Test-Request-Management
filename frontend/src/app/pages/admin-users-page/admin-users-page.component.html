@@ -12,7 +12,12 @@
   <!-- Position Column -->
   <ng-container matColumnDef="nif">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>NIF</th>
-    <td mat-cell *matCellDef="let element" class="nif">
+    <td
+      mat-cell
+      *matCellDef="let element"
+      class="nif"
+      (click)="showUser(element.nif)"
+    >
       {{ element.nif }}
     </td>
   </ng-container>

@@ -19,7 +19,7 @@
             <a routerLink="/admin/users">Employees</a>
           </li>
           <li>
-            <a routerLink="/admin/profile">Profile</a>
+            <a (click)="showProfile()" routerLink="/admin/profile">Profile</a>
           </li>
           <li>
             <a (click)="logout()" routerLink="/login/">Logout</a>

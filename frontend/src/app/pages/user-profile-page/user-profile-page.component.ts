@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
+import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,19 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-profile-page.component.css'],
 })
 export class UserProfilePageComponent implements OnInit {
+  information: any;
+
   user: any;
 
   roleUser: string = 'User';
   roleAdmin: string = 'Admin';
 
-  constructor(public users: UsersService, public router: Router) {}
+  constructor(
+    public users: UsersService,
+    public router: Router,
+    public data: DataService
+  ) {}
 
   ngOnInit(): void {
-    this.users
-      .getUsers(`nif=${JSON.parse(localStorage.getItem('user')).nif}`)
-      .subscribe((res) => {
-        this.user = res.userList[0];
-      });
+    this.data.currentInformation.subscribe(
+      (information) => (this.information = information)
+    );
+
+    this.users.getUsers(`nif=${this.information}`).subscribe((res) => {
+      this.user = res.userList[0];
+    });
   }
 
   goBack() {

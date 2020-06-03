@@ -47,4 +47,8 @@ export class AdminUsersPageComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  showUser(userId) {
+    this.data.changeinformation(userId);
+  }
 }

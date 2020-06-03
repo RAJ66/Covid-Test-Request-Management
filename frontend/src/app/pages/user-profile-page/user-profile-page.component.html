@@ -1,5 +1,5 @@
-<app-header-user *ngIf="user.role === roleUser"></app-header-user>
-<app-header-admin *ngIf="user.role === roleAdmin"></app-header-admin>
+<app-header-user *ngIf="user && user.role === roleUser"></app-header-user>
+<app-header-admin *ngIf="user && user.role === roleAdmin"></app-header-admin>
 <div class="request-container">
   <div class="content" *ngIf="user">
     <mat-toolbar color="primary" class="toolbar">

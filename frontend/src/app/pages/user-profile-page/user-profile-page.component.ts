@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class UserProfilePageComponent implements OnInit {
   user: any;
 
+  roleUser: string = 'User';
+  roleAdmin: string = 'Admin';
+
   constructor(public users: UsersService, public router: Router) {}
 
   ngOnInit(): void {

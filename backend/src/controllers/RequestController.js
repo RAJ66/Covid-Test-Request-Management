@@ -263,7 +263,11 @@ const groupFirstTestPerDay = () => {
       $group: {
         _id: {
           // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
-          $dateToString: { format: "%Y-%m-%d", date: "$firstTestDate" },
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$firstTestDate",
+            timezone: "+01:00",
+          },
         },
         total: { $sum: 1 },
       },
@@ -290,7 +294,11 @@ const groupSecondTestPerDay = () => {
       $group: {
         _id: {
           // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
-          $dateToString: { format: "%Y-%m-%d", date: "$secondTestDate" },
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$secondTestDate",
+            timezone: "+01:00",
+          },
         },
         total: { $sum: 1 },
       },

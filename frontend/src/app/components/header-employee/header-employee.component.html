@@ -16,6 +16,11 @@
             <a routerLink="/employee/requests">My Requests</a>
           </li>
           <li>
+            <a (click)="showProfile()" routerLink="/employee/profile"
+              >My Profile</a
+            >
+          </li>
+          <li>
             <a (click)="logout()" routerLink="/login/">Logout</a>
           </li>
         </ul>

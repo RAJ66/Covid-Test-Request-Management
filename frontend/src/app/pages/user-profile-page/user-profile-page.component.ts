@@ -35,12 +35,16 @@ export class UserProfilePageComponent implements OnInit {
   }
 
   goBack() {
-    if (this.userLogged.role === 'User') {
+    if (this.userLogged.role === 'Admin') {
+      if (this.userLogged.nif === this.user.nif) {
+        this.router.navigate(['/admin/']);
+      } else {
+        this.router.navigate(['/admin/users/']);
+      }
+    } else if (this.userLogged.role === 'User') {
       this.router.navigate(['/user/']);
-    } else if (this.userLogged.nif === this.user.nif) {
-      this.router.navigate(['/admin/']);
-    } else {
-      this.router.navigate(['/admin/users/']);
+    } else if (this.userLogged.role === 'Employee') {
+      this.router.navigate(['/employee/']);
     }
   }
 

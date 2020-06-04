@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../services/session.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-header-employee',
@@ -8,11 +8,15 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./header-employee.component.css'],
 })
 export class HeaderEmployeeComponent implements OnInit {
-  constructor(public session: SessionService, public router: Router) {}
+  constructor(public session: SessionService, public data: DataService) {}
 
   ngOnInit(): void {}
 
   logout() {
     this.session.logout().subscribe();
+  }
+
+  showProfile() {
+    this.data.changeinformation(JSON.parse(localStorage.getItem('user')).nif);
   }
 }

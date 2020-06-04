@@ -43,4 +43,18 @@ export class UserProfilePageComponent implements OnInit {
       this.router.navigate(['/admin/users/']);
     }
   }
+
+  goUpdate() {
+    if (this.userLogged.role === 'Admin') {
+      if (this.user.nif === this.userLogged.nif) {
+        this.router.navigate(['/admin/profile/update']);
+      } else {
+        this.router.navigate(['/admin/users/profile/update']);
+      }
+    } else if (this.userLogged.role === 'User') {
+      this.router.navigate(['/user/profile/update']);
+    } else if (this.userLogged.role === 'Employee') {
+      this.router.navigate(['/employee/profile/update']);
+    }
+  }
 }

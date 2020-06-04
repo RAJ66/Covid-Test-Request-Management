@@ -11,6 +11,8 @@ import { DataService } from '../../services/data.service';
 export class ChangePasswordPageComponent implements OnInit {
   information: any;
 
+  userLogged: any = JSON.parse(localStorage.getItem('user'));
+
   newPassword: string;
   currentPassword: string;
   update: any = {};
@@ -42,5 +44,33 @@ export class ChangePasswordPageComponent implements OnInit {
       }
       //this.router.navigate(['/user/profile']);
     });
+  }
+
+  cancel() {
+    if (this.userLogged.role === 'Admin') {
+      if (this.userLogged.nif === this.user.nif) {
+        this.router.navigate(['/admin/profile']);
+      } else {
+        this.router.navigate(['/admin/users/profile']);
+      }
+    } else if (this.userLogged.role === 'User') {
+      this.router.navigate(['/user/profile']);
+    } else if (this.userLogged.role === 'Employee') {
+      this.router.navigate(['/employee/profile']);
+    }
+  }
+
+  confirmMessage() {
+    if (this.userLogged.role === 'Admin') {
+      if (this.userLogged.nif === this.user.nif) {
+        this.router.navigate(['/admin/profile']);
+      } else {
+        this.router.navigate(['/admin/users/profile']);
+      }
+    } else if (this.userLogged.role === 'User') {
+      this.router.navigate(['/user/profile']);
+    } else if (this.userLogged.role === 'Employee') {
+      this.router.navigate(['/employee/profile']);
+    }
   }
 }

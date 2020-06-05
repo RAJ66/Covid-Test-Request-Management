@@ -18,6 +18,8 @@ export class UserProfilePageComponent implements OnInit {
   roleAdmin: string = 'Admin';
   roleEmployee: string = 'Employee';
 
+  success: boolean = false;
+
   constructor(
     public users: UsersService,
     public router: Router,
@@ -60,5 +62,13 @@ export class UserProfilePageComponent implements OnInit {
     } else if (this.userLogged.role === 'Employee') {
       this.router.navigate(['/employee/profile/update']);
     }
+  }
+
+  deleteUser() {
+    this.users.deleteUser(this.user._id).subscribe((res) => {
+      if (res.delete === true) {
+        this.success = true;
+      }
+    });
   }
 }

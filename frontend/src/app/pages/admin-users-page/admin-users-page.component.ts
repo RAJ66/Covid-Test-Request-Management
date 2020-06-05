@@ -45,6 +45,16 @@ export class AdminUsersPageComponent implements OnInit {
       //To remove the Admin Logged
       this.allUsers.splice(index, 1);
 
+      //Dates in our time zone
+      for (let i = 0; i < this.allUsers.length; i++) {
+        this.allUsers[i].birthDate =
+          new Date(this.allUsers[i].birthDate).getFullYear() +
+          '/' +
+          (new Date(this.allUsers[i].birthDate).getMonth() + 1) +
+          '/' +
+          new Date(this.allUsers[i].birthDate).getDate();
+      }
+
       this.dataSource = new MatTableDataSource(this.allUsers);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

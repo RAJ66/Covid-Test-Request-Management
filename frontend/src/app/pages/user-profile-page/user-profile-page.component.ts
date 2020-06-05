@@ -33,6 +33,14 @@ export class UserProfilePageComponent implements OnInit {
 
     this.users.getUsers(`nif=${this.information}`).subscribe((res) => {
       this.user = res.userList[0];
+
+      //Dates in our time zone
+      this.user.birthDate =
+        new Date(this.user.birthDate).getFullYear() +
+        '/' +
+        (new Date(this.user.birthDate).getMonth() + 1) +
+        '/' +
+        new Date(this.user.birthDate).getDate();
     });
   }
 

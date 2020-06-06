@@ -7,9 +7,14 @@
     <div class="information">
       <p>Employee ID: {{ request.employeeId }}</p>
       <p>User ID: {{ request.userId }}</p>
-      <p>Risk Group: {{ request.riskGroup }}</p>
-      <p>Risk Profession: {{ request.riskProfession }}</p>
-      <p>saude24: {{ request.saude24 }}</p>
+      <p *ngIf="request.riskGroup === true">Risk Group: Yes</p>
+      <p *ngIf="request.riskGroup === false">Risk Group: No</p>
+
+      <p *ngIf="request.riskProfession === true">Risk Profession: Yes</p>
+      <p *ngIf="request.riskProfession === false">Risk Profession: No</p>
+
+      <p *ngIf="request.saude24 === true">saude24: Yes</p>
+      <p *ngIf="request.saude24 === false">saude24: No</p>
 
       <form>
         <mat-expansion-panel>

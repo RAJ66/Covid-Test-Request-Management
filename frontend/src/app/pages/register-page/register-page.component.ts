@@ -8,13 +8,17 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./register-page.component.css'],
 })
 export class RegisterPageComponent implements OnInit {
+  user: any = JSON.parse(localStorage.getItem('user'));
+
   nif: number;
   email: string;
   name: string;
   password: string;
   contact: number;
   birthDate: Date;
-  role: string = 'User';
+  roleUser: string = 'User';
+  roleEmployee: string = 'Employee';
+  success: boolean = false;
 
   constructor(public users: UsersService, public router: Router) {}
 
@@ -22,22 +26,46 @@ export class RegisterPageComponent implements OnInit {
 
   handleRegister(event): void {
     event.preventDefault();
-    this.users
-      .createUser(
-        this.nif,
-        this.password,
-        this.email,
-        this.name,
-        this.birthDate,
-        this.contact,
-        this.role
-      )
-      .subscribe(() => {
-        this.router.navigate(['/login']);
-      });
+    if (this.user) {
+      this.users
+        .createUser(
+          this.nif,
+          this.password,
+          this.email,
+          this.name,
+          this.birthDate,
+          this.contact,
+          this.roleEmployee
+        )
+        .subscribe(() => {
+          this.success = true;
+        });
+    } else {
+      this.users
+        .createUser(
+          this.nif,
+          this.password,
+          this.email,
+          this.name,
+          this.birthDate,
+          this.contact,
+          this.roleUser
+        )
+        .subscribe(() => {
+          this.router.navigate(['/login']);
+        });
+    }
   }
 
   loginPage(): void {
     this.router.navigate(['/login']);
+  }
+
+  goBack(): void {
+    if (this.user) {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }

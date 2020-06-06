@@ -13,6 +13,8 @@ import { UserProfilePageComponent } from './pages/user-profile-page/user-profile
 import { UpdateProfilePageComponent } from './pages/update-profile-page/update-profile-page.component';
 import { CreateRequestPageComponent } from './pages/create-request-page/create-request-page.component';
 import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { AdminUsersPageComponent } from './pages/admin-users-page/admin-users-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -29,9 +31,31 @@ const routes: Routes = [
     component: ChangePasswordPageComponent,
   },
   { path: 'employee', component: EmployeePageComponent },
+  { path: 'employee/profile', component: UserProfilePageComponent },
+  { path: 'employee/profile/update', component: UpdateProfilePageComponent },
+  {
+    path: 'employee/profile/update/password',
+    component: ChangePasswordPageComponent,
+  },
   { path: 'employee/request', component: RequestPageComponent },
   { path: 'employee/request/update', component: UpdateRequestPageComponent },
   { path: 'employee/requests', component: EmployeeRequestsPageComponent },
+  { path: 'admin', component: AdminPageComponent },
+  { path: 'admin/users', component: AdminUsersPageComponent },
+  { path: 'admin/users/profile', component: UserProfilePageComponent },
+  { path: 'admin/users/profile/update', component: UpdateProfilePageComponent },
+  {
+    path: 'admin/users/profile/update/password',
+    component: ChangePasswordPageComponent,
+  },
+  { path: 'admin/profile', component: UserProfilePageComponent },
+  { path: 'admin/profile/update', component: UpdateProfilePageComponent },
+  {
+    path: 'admin/profile/update/password',
+    component: ChangePasswordPageComponent,
+  },
+  { path: 'employee/profile/update', component: UpdateProfilePageComponent },
+  { path: 'admin/registerEmployee', component: RegisterPageComponent },
   { path: '**', component: HomePageComponent },
 ];
 

@@ -11,11 +11,16 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./employee-page.component.css'],
 })
 export class EmployeePageComponent implements OnInit {
+  allRequests: any;
+
   dataSource: any;
   displayedColumns: string[] = [
     'id',
     'requestState',
     'userState',
+    'riskGroup',
+    'riskProfession',
+    'saude24',
     'userId',
     'firstTestDate',
     'firstTestResult',
@@ -32,7 +37,53 @@ export class EmployeePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.requests.getRequests(null).subscribe((res: any) => {
-      this.dataSource = new MatTableDataSource(res.requestList);
+      this.allRequests = res.requestList;
+
+      //Dates in our time zone
+      for (let i = 0; i < this.allRequests.length; i++) {
+        if (this.allRequests[i].riskGroup === true) {
+          this.allRequests[i].riskGroup = 'Yes';
+        } else {
+          this.allRequests[i].riskGroup = 'No';
+        }
+
+        if (this.allRequests[i].riskProfession === true) {
+          this.allRequests[i].riskProfession = 'Yes';
+        } else {
+          this.allRequests[i].riskProfession = 'No';
+        }
+
+        if (this.allRequests[i].saude24 === true) {
+          this.allRequests[i].saude24 = 'Yes';
+        } else {
+          this.allRequests[i].saude24 = 'No';
+        }
+
+        //First Dates
+        if (this.allRequests[i].firstTestDate === undefined) {
+          this.allRequests[i].firstTestDate = 'Pending';
+        } else {
+          this.allRequests[i].firstTestDate =
+            new Date(this.allRequests[i].firstTestDate).getFullYear() +
+            '/' +
+            (new Date(this.allRequests[i].firstTestDate).getMonth() + 1) +
+            '/' +
+            new Date(this.allRequests[i].firstTestDate).getDate();
+        }
+        //Second Dates
+        if (this.allRequests[i].secondTestDate === undefined) {
+          this.allRequests[i].secondTestDate = 'Pending';
+        } else {
+          this.allRequests[i].secondTestDate =
+            new Date(this.allRequests[i].secondTestDate).getFullYear() +
+            '/' +
+            (new Date(this.allRequests[i].secondTestDate).getMonth() + 1) +
+            '/' +
+            new Date(this.allRequests[i].secondTestDate).getDate();
+        }
+      }
+
+      this.dataSource = new MatTableDataSource(this.allRequests);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });

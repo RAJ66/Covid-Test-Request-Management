@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+img {
+  width: 100%;
+}
+
+.firstTests {
+  width: 50%;
+}
+
+.secondTests {
+  width: 50%;
+}
+
+.firstTestsCard {
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.secondTestsCard {
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.kpis {
+  padding-top: 30px;
+  width: 90%;
+  max-width: 980px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}

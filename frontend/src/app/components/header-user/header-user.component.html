@@ -14,10 +14,10 @@
             <a routerLink="/user/requests">My Requests</a>
           </li>
           <li>
-            <a routerLink="/user/profile">My Profile</a>
+            <a (click)="showProfile()" routerLink="/user/profile">My Profile</a>
           </li>
           <li>
-            <a routerLink="/login/" (click)="logout()">Logout</a>
+            <a routerLink="/home/" (click)="logout()">Logout</a>
           </li>
         </ul>
       </nav>

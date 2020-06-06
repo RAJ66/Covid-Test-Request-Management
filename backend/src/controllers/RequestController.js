@@ -257,4 +257,132 @@ requestController.updateImage = async (req, res) => {
   }
 };
 
+const groupFirstTestPerDay = () => {
+  return Request.aggregate([
+    {
+      $group: {
+        _id: {
+          // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$firstTestDate",
+            timezone: "+01:00",
+          },
+        },
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        date: "$_id",
+        totalTests: "$total",
+        _id: false,
+      },
+    },
+    {
+      $sort: { date: 1 },
+    },
+  ]).catch((e) => {
+    console.log(e);
+    return [];
+  });
+};
+
+const groupSecondTestPerDay = () => {
+  return Request.aggregate([
+    {
+      $group: {
+        _id: {
+          // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$secondTestDate",
+            timezone: "+01:00",
+          },
+        },
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        date: "$_id",
+        totalTests: "$total",
+        _id: false,
+      },
+    },
+    {
+      $sort: { date: 1 },
+    },
+  ]).catch((e) => {
+    console.log(e);
+    return [];
+  });
+};
+
+const groupTestsPerUser = () => {
+  return Request.aggregate([
+    {
+      $group: {
+        _id: "$userId",
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        userId: "$_id",
+        totalTests: "$total",
+        _id: false,
+      },
+    },
+    {
+      $sort: { userId: 1 },
+    },
+  ]).catch((e) => {
+    console.log(e);
+    return [];
+  });
+};
+
+requestController.status = async (req, res) => {
+  const [firstTestsPerDay, secondTestsPerDay, testsPerUser] = await Promise.all(
+    [
+      groupFirstTestPerDay(),
+      groupSecondTestPerDay(),
+      groupTestsPerUser(),
+      //countEvents(),
+    ]
+  );
+  //First Tests
+  let firstDates = [];
+  let firstValues = [];
+  for (data in firstTestsPerDay) {
+    firstDates.push(firstTestsPerDay[data].date);
+    firstValues.push(firstTestsPerDay[data].totalTests);
+  }
+
+  //Second Tests
+  let secondDates = [];
+  let secondValues = [];
+  for (data in secondTestsPerDay) {
+    secondDates.push(secondTestsPerDay[data].date);
+    secondValues.push(secondTestsPerDay[data].totalTests);
+  }
+
+  let usersIds = [];
+  let totalValues = [];
+  for (data in testsPerUser) {
+    usersIds.push(testsPerUser[data].userId);
+    totalValues.push(testsPerUser[data].totalTests);
+  }
+
+  res.json({
+    firstDates,
+    firstValues,
+    secondDates,
+    secondValues,
+    usersIds,
+    totalValues,
+  });
+};
+
 module.exports = requestController;

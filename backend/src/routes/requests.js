@@ -26,9 +26,16 @@ router.get(
 //Edit/Update request
 router.put("/request/:id", authorize(["Admin", "Employee"]), request.update);
 
-router.put("/request/:id/file", upload.single("file"), request.updateImage);
+router.put(
+  "/request/:id/file",
+  authorize(["Employee"]),
+  upload.single("file"),
+  request.updateImage
+);
 
 //Delete request
 router.delete("/request/:id", authorize(["Admin", "Employee"]), request.delete);
 
+//status
+router.get("/request_status/", authorize(["Admin"]), request.status);
 module.exports = router;

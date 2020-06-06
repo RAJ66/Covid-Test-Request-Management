@@ -67,7 +67,7 @@
         </mat-form-field>
       </form>
 
-      <a routerLink="/user/profile/update/password">Change Password</a>
+      <a (click)="goChangePassword()">Change Password</a>
 
       <div class="buttons">
         <button mat-raised-button color="primary" (click)="updateProfile()">

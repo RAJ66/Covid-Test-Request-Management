@@ -6,8 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
+import { DataService } from '../../services/data.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -30,6 +31,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./update-profile-page.component.css'],
 })
 export class UpdateProfilePageComponent implements OnInit {
+  information: any;
+
+  userLogged: any = JSON.parse(localStorage.getItem('user'));
   user: any;
 
   emailFormControl = new FormControl('', [
@@ -39,19 +43,39 @@ export class UpdateProfilePageComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(public users: UsersService, public router: Router) {}
+  constructor(
+    public users: UsersService,
+    public router: Router,
+    public data: DataService
+  ) {}
 
   ngOnInit(): void {
-    this.users
-      .getUsers(`nif=${JSON.parse(localStorage.getItem('user')).nif}`)
-      .subscribe((res) => {
-        this.user = res.userList[0];
-      });
+    this.data.currentInformation.subscribe(
+      (information) => (this.information = information)
+    );
+
+    this.users.getUsers(`nif=${this.information}`).subscribe((res) => {
+      this.user = res.userList[0];
+    });
   }
 
   updateProfile() {
     this.users.updateUser(this.user._id, this.user).subscribe(() => {
       this.router.navigate(['/user/profile']);
     });
+  }
+
+  goChangePassword() {
+    if (this.userLogged.role === 'Admin') {
+      if (this.user.nif === this.userLogged.nif) {
+        this.router.navigate(['/admin/profile/update/password/']);
+      } else {
+        this.router.navigate(['/admin/users/profile/update/password/']);
+      }
+    } else if (this.userLogged.role === 'User') {
+      this.router.navigate(['/user/profile/update/password/']);
+    } else if (this.userLogged.role === 'Employee') {
+      this.router.navigate(['/employee/profile/update/password/']);
+    }
   }
 }

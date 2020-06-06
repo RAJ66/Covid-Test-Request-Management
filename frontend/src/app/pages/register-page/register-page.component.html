@@ -1,5 +1,5 @@
 <div class="register-container">
-  <div class="content">
+  <div class="content" *ngIf="!success">
     <section>
       <h1>
         Registration
@@ -8,11 +8,17 @@
           alt="Create Users"
         />
       </h1>
-      <p>
+      <p *ngIf="!user">
         Create a Users Account
       </p>
+      <p *ngIf="user">
+        Create a Employee Account
+      </p>
 
-      <button (click)="loginPage()">I have an account</button>
+      <div class="buttons">
+        <button (click)="loginPage()" *ngIf="!user">I have an account</button>
+        <button (click)="goBack()">Go back</button>
+      </div>
     </section>
 
     <form (submit)="handleRegister($event)">
@@ -70,5 +76,11 @@
         Register
       </button>
     </form>
+  </div>
+  <div *ngIf="success" class="successMessage">
+    <h2>Employee was created.</h2>
+    <button mat-raised-button color="primary" routerLink="/admin/">
+      Confirm
+    </button>
   </div>
 </div>

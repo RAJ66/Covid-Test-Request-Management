@@ -37,7 +37,7 @@ sessionController.login = async function (req, res) {
         res.json({ userLogged });
       } else {
         res.status(401);
-        res.send("Incorrect");
+        res.send("Incorrect User or Password");
       }
     });
   } else {

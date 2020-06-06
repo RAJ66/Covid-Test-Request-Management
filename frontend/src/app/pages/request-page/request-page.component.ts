@@ -35,6 +35,27 @@ export class RequestPageComponent implements OnInit {
 
     this.requests.getOneRequest(this.information).subscribe((res) => {
       this.request = res.request;
+
+      if (this.request.firstTestDate !== undefined) {
+        //First Test Date
+        this.request.firstTestDate =
+          new Date(this.request.firstTestDate).getFullYear() +
+          '/' +
+          (new Date(this.request.firstTestDate).getMonth() + 1) +
+          '/' +
+          new Date(this.request.firstTestDate).getDate();
+      }
+
+      if (this.request.secondTestDate !== undefined) {
+        //Second Test Date
+        this.request.secondTestDate =
+          new Date(this.request.secondTestDate).getFullYear() +
+          '/' +
+          (new Date(this.request.secondTestDate).getMonth() + 1) +
+          '/' +
+          new Date(this.request.secondTestDate).getDate();
+      }
+
       this.requestState = this.request.requestState === 'Done';
     });
 

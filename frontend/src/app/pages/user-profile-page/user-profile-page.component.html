@@ -1,6 +1,7 @@
-<app-header-user></app-header-user>
+<app-header-user *ngIf="user && user.role === roleUser"></app-header-user>
+<app-header-admin *ngIf="user && user.role === roleAdmin"></app-header-admin>
 <div class="request-container">
-  <div class="content" *ngIf="user">
+  <div class="content" *ngIf="user && !success">
     <mat-toolbar color="primary" class="toolbar">
       <h2>NIF:{{ user.nif }}</h2>
     </mat-toolbar>
@@ -14,15 +15,32 @@
         <button
           mat-raised-button
           color="primary"
-          routerLink="/user/profile/update"
+          (click)="goUpdate()"
+          *ngIf="user.role === roleEmployee || user.nif === userLogged.nif"
         >
           Update
         </button>
-        <button mat-raised-button color="primary" routerLink="/user/">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="deleteUser()"
+          *ngIf="user.role === roleEmployee && userLogged.role === roleAdmin"
+        >
+          Delete
+        </button>
+        <button mat-raised-button color="primary" (click)="goBack()">
           Go Back
         </button>
       </div>
     </div>
+  </div>
+  <div class="successMessage" *ngIf="success">
+    <h2>
+      User deleted.
+    </h2>
+    <button mat-raised-button color="primary" routerLink="/admin/users">
+      Confirm
+    </button>
   </div>
   <div *ngIf="!user">
     <mat-spinner></mat-spinner>

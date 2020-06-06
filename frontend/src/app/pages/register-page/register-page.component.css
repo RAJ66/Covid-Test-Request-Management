@@ -112,3 +112,12 @@
   align-items: center;
   width: 50%;
 }
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons * {
+  margin-bottom: 10px;
+}

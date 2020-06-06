@@ -60,4 +60,12 @@ export class RegisterPageComponent implements OnInit {
   loginPage(): void {
     this.router.navigate(['/login']);
   }
+
+  goBack(): void {
+    if (this.user) {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+  }
 }

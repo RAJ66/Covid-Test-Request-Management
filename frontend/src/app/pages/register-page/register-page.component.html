@@ -16,7 +16,10 @@
         Create a Employee Account
       </p>
 
-      <button (click)="loginPage()" *ngIf="!user">I have an account</button>
+      <div class="buttons">
+        <button (click)="loginPage()" *ngIf="!user">I have an account</button>
+        <button (click)="goBack()">Go back</button>
+      </div>
     </section>
 
     <form (submit)="handleRegister($event)">

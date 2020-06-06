@@ -116,4 +116,29 @@ userController.delete = async function (req, res) {
   }
 };
 
+userController.status = async (req, res) => {
+  try {
+    const users = await User.find({
+      role: "User",
+    }).count();
+
+    const employees = await User.find({
+      role: "Employee",
+    }).count();
+
+    const admins = await User.find({
+      role: "Admin",
+    }).count();
+
+    res.json({
+      users,
+      employees,
+      admins,
+    });
+  } catch (error) {
+    res.status(500);
+    res.json({ err: e });
+  }
+};
+
 module.exports = userController;

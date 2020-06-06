@@ -22,4 +22,7 @@ router.delete(
   user.delete
 );
 
+//status
+router.get("/user_status/", authorize(["Admin"]), user.status);
+
 module.exports = router;

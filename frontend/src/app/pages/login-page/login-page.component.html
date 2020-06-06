@@ -2,7 +2,14 @@
   <section class="form">
     <form (submit)="handleSubmit($event)">
       <h1>Login</h1>
-      <input [(ngModel)]="nif" name="nif" type="text" placeholder="NIF" />
+      <input
+        [(ngModel)]="nif"
+        name="nif"
+        type="number"
+        min="100000000"
+        max="999999999"
+        placeholder="NIF"
+      />
       <input
         [(ngModel)]="password"
         name="password"

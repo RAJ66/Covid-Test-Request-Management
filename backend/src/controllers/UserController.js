@@ -126,14 +126,9 @@ userController.status = async (req, res) => {
       role: "Employee",
     }).count();
 
-    const admins = await User.find({
-      role: "Admin",
-    }).count();
-
     res.json({
       users,
       employees,
-      admins,
     });
   } catch (error) {
     res.status(500);

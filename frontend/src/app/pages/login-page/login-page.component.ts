@@ -22,16 +22,21 @@ export class LoginPageComponent implements OnInit {
 
   handleSubmit(event): void {
     event.preventDefault();
-    this.session.login(this.nif, this.password).subscribe(() => {
-      const user = JSON.parse(localStorage.getItem('user'));
-      console.log(user.role);
-      if (user.role === 'Admin') {
-        this.router.navigate(['/admin']);
-      } else if (user.role === 'Employee') {
-        this.router.navigate(['employee']);
-      } else {
-        this.router.navigate(['/user']);
+    this.session.login(this.nif, this.password).subscribe(
+      () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user.role === 'Admin') {
+          this.router.navigate(['/admin']);
+        } else if (user.role === 'Employee') {
+          this.router.navigate(['employee']);
+        } else {
+          this.router.navigate(['/user']);
+        }
+      },
+      (error) => {
+        alert(error.error);
+        console.log(error);
       }
-    });
+    );
   }
 }

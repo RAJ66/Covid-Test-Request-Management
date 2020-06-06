@@ -62,28 +62,6 @@ export class EmployeePageComponent implements OnInit {
         }
       }
 
-      //Format Dates
-      /*for (let i = 0; i < this.allRequests.length; i++) {
-        if (this.allRequests[i].firstTestDate != 'Pending') {
-          //First Test Date Format
-          this.allRequests[i].firstTestDate =
-            this.allRequests[i].firstTestDate.getFullYear() +
-            '/' +
-            (this.allRequests[i].firstTestDate.getMonth() + 1) +
-            '/' +
-            this.allRequests[i].firstTestDate.getDate();
-        }
-        if (this.allRequests[i].secondTestDate != 'Pending') {
-          //Second Test Date Format
-          this.allRequests[i].secondTestDate =
-            this.allRequests[i].secondTestDate.getFullYear() +
-            '/' +
-            (this.allRequests[i].secondTestDate.getMonth() + 1) +
-            '/' +
-            this.allRequests[i].secondTestDate.getDate();
-        }
-      }*/
-
       this.dataSource = new MatTableDataSource(this.allRequests);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

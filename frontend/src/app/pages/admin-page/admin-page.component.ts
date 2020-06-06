@@ -36,8 +36,6 @@ export class AdminPageComponent implements OnInit {
           this.secondDates[i] = "'Undefined'";
         }
       }
-
-      console.log(this.secondDates[0]);
     });
   }
 }

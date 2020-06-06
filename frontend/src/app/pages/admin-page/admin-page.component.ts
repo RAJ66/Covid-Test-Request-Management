@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestsService } from '../../services/requests.service';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -14,10 +14,17 @@ export class AdminPageComponent implements OnInit {
   usersIds: any = [];
   totalValues: any = [];
 
-  constructor(public requests: RequestsService) {}
+  totalUsers: any;
+  totalEmployees: any;
+  totalRequests: any;
+  totalNegative: any;
+  totalPositive: any;
+  totalSuspect: any;
+
+  constructor(public dashboard: DashboardService) {}
 
   ngOnInit(): void {
-    this.requests.requestsStats().subscribe((res) => {
+    this.dashboard.requestsStats().subscribe((res) => {
       this.firstDates = res.firstDates;
       this.firstValues = res.firstValues;
       this.secondDates = res.secondDates;
@@ -44,6 +51,18 @@ export class AdminPageComponent implements OnInit {
       for (let i = 0; i < this.usersIds.length; i++) {
         this.usersIds[i] = "'" + this.usersIds[i] + "'";
       }
+    });
+
+    this.dashboard.users().subscribe((res) => {
+      this.totalUsers = res.users;
+      this.totalEmployees = res.employees;
+    });
+
+    this.dashboard.list().subscribe((res) => {
+      this.totalRequests = res.requestTotal;
+      this.totalNegative = res.requestTotalNeg;
+      this.totalPositive = res.requestTotalPos;
+      this.totalSuspect = res.requestTotalUn;
     });
   }
 }

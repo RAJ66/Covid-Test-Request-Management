@@ -18,4 +18,12 @@ export class DashboardService {
   list(): Observable<any> {
     return this.http.get(`${API_URL}dashboard`, httpOptions);
   }
+
+  users(): Observable<any> {
+    return this.http.get(`${API_URL}user_status`, httpOptions);
+  }
+
+  requestsStats(): Observable<any> {
+    return this.http.get(`${API_URL}request_status`, httpOptions);
+  }
 }

@@ -19,6 +19,9 @@ export class EmployeeRequestsPageComponent implements OnInit {
     'id',
     'requestState',
     'userState',
+    'riskGroup',
+    'riskProfession',
+    'saude24',
     'userId',
     'firstTestDate',
     'firstTestResult',
@@ -47,6 +50,24 @@ export class EmployeeRequestsPageComponent implements OnInit {
 
           //Dates in our time zone
           for (let i = 0; i < this.allRequests.length; i++) {
+            if (this.allRequests[i].riskGroup === true) {
+              this.allRequests[i].riskGroup = 'Yes';
+            } else {
+              this.allRequests[i].riskGroup = 'No';
+            }
+
+            if (this.allRequests[i].riskProfession === true) {
+              this.allRequests[i].riskProfession = 'Yes';
+            } else {
+              this.allRequests[i].riskProfession = 'No';
+            }
+
+            if (this.allRequests[i].saude24 === true) {
+              this.allRequests[i].saude24 = 'Yes';
+            } else {
+              this.allRequests[i].saude24 = 'No';
+            }
+
             //First Dates
             if (this.allRequests[i].firstTestDate === undefined) {
               this.allRequests[i].firstTestDate = 'Pending';
@@ -83,6 +104,24 @@ export class EmployeeRequestsPageComponent implements OnInit {
 
           //Dates in our time zone
           for (let i = 0; i < this.allRequests.length; i++) {
+            if (this.allRequests[i].riskGroup === true) {
+              this.allRequests[i].riskGroup = 'Yes';
+            } else {
+              this.allRequests[i].riskGroup = 'No';
+            }
+
+            if (this.allRequests[i].riskProfession === true) {
+              this.allRequests[i].riskProfession = 'Yes';
+            } else {
+              this.allRequests[i].riskProfession = 'No';
+            }
+
+            if (this.allRequests[i].saude24 === true) {
+              this.allRequests[i].saude24 = 'Yes';
+            } else {
+              this.allRequests[i].saude24 = 'No';
+            }
+
             //First Dates
             if (this.allRequests[i].firstTestDate === undefined) {
               this.allRequests[i].firstTestDate = 'Pending';

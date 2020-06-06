@@ -34,6 +34,29 @@
     <td mat-cell *matCellDef="let element">{{ element.userState }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="riskGroup">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+      Risk Group
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.riskGroup }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="riskProfession">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+      Risk Profession
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.riskProfession }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="saude24">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+      Saude24
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.saude24 }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="userId">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
     <td mat-cell *matCellDef="let element">{{ element.userId }}</td>

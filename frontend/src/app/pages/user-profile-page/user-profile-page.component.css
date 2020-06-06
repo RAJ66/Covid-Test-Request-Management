@@ -26,12 +26,13 @@
   justify-content: space-around;
 }
 
-button {
+.button-container * {
   margin-top: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 .information {
-  width: 50%;
   padding-top: 50px;
 
   padding-right: 96px;

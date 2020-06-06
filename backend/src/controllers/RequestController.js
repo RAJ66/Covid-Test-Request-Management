@@ -319,12 +319,39 @@ const groupSecondTestPerDay = () => {
   });
 };
 
+const groupTestsPerUser = () => {
+  return Request.aggregate([
+    {
+      $group: {
+        _id: "$userId",
+        total: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        userId: "$_id",
+        totalTests: "$total",
+        _id: false,
+      },
+    },
+    {
+      $sort: { userId: 1 },
+    },
+  ]).catch((e) => {
+    console.log(e);
+    return [];
+  });
+};
+
 requestController.status = async (req, res) => {
-  const [firstTestsPerDay, secondTestsPerDay] = await Promise.all([
-    groupFirstTestPerDay(),
-    groupSecondTestPerDay(),
-    //countEvents(),
-  ]);
+  const [firstTestsPerDay, secondTestsPerDay, testsPerUser] = await Promise.all(
+    [
+      groupFirstTestPerDay(),
+      groupSecondTestPerDay(),
+      groupTestsPerUser(),
+      //countEvents(),
+    ]
+  );
   //First Tests
   let firstDates = [];
   let firstValues = [];
@@ -341,11 +368,20 @@ requestController.status = async (req, res) => {
     secondValues.push(secondTestsPerDay[data].totalTests);
   }
 
+  let usersIds = [];
+  let totalValues = [];
+  for (data in testsPerUser) {
+    usersIds.push(testsPerUser[data].userId);
+    totalValues.push(testsPerUser[data].totalTests);
+  }
+
   res.json({
     firstDates,
     firstValues,
     secondDates,
     secondValues,
+    usersIds,
+    totalValues,
   });
 };
 

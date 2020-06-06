@@ -7,10 +7,12 @@ import { RequestsService } from '../../services/requests.service';
   styleUrls: ['./admin-page.component.css'],
 })
 export class AdminPageComponent implements OnInit {
-  firstDates = [];
-  firstValues = [];
-  secondDates = [];
-  secondValues = [];
+  firstDates: any = [];
+  firstValues: any = [];
+  secondDates: any = [];
+  secondValues: any = [];
+  usersIds: any = [];
+  totalValues: any = [];
 
   constructor(public requests: RequestsService) {}
 
@@ -20,6 +22,8 @@ export class AdminPageComponent implements OnInit {
       this.firstValues = res.firstValues;
       this.secondDates = res.secondDates;
       this.secondValues = res.secondValues;
+      this.usersIds = res.usersIds;
+      this.totalValues = res.totalValues;
 
       for (let i = 0; i < this.firstDates.length; i++) {
         this.firstDates[i] = "'" + this.firstDates[i] + "'";
@@ -35,6 +39,10 @@ export class AdminPageComponent implements OnInit {
         if (this.secondDates[i] === "'null'") {
           this.secondDates[i] = "'Undefined'";
         }
+      }
+
+      for (let i = 0; i < this.usersIds.length; i++) {
+        this.usersIds[i] = "'" + this.usersIds[i] + "'";
       }
     });
   }

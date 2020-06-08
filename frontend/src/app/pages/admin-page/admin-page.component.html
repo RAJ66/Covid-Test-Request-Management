@@ -40,8 +40,8 @@
     alt="Users"
   ></app-kpi>
 </div>
-<div class="container">
-  <div class="firstTests">
+<div class="grafs">
+  <div class="graftAdmin">
     <mat-card class="firstTestsCard">
       <mat-toolbar color="primary" class="toolbar">
         <h2>First Tests Per Day</h2>
@@ -49,14 +49,14 @@
       <img
         src="https://quickchart.io/chart?c={type:'line',data:{labels:[{{
           firstDates
-        }}], datasets:[{label:'Tests', data:[{{
+        }}], datasets:[{label:'Requests', data:[{{
           firstValues
         }}], fill:false,borderColor:'blue'}]}}"
       />
     </mat-card>
   </div>
 
-  <div class="secondTests">
+  <div class="graftAdmin">
     <mat-card class="secondTestsCard">
       <mat-toolbar color="primary" class="toolbar">
         <h2>Second Tests Per Day</h2>
@@ -64,14 +64,14 @@
       <img
         src="https://quickchart.io/chart?c={type:'line',data:{labels:[{{
           secondDates
-        }}], datasets:[{label:'Tests', data:[{{
+        }}], datasets:[{label:'Requests', data:[{{
           secondValues
         }}], fill:false,borderColor:'green'}]}}"
       />
     </mat-card>
   </div>
 
-  <div class="testsPerUser">
+  <div class="graftAdmin">
     <mat-card class="testsPerUser">
       <mat-toolbar color="primary" class="toolbar">
         <h2>Requests Per User</h2>

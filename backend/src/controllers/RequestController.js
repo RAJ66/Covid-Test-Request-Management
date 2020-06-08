@@ -142,7 +142,6 @@ requestController.update = async function (req, res) {
 
     const testResultPending = "Pending";
     const testResultPositive = "Positive";
-    const testResultNegative = "Negative";
 
     const save = {};
     let updated = false;
@@ -217,15 +216,11 @@ requestController.update = async function (req, res) {
       save.employeeId = req.body.employeeId;
       const updatedRequest = await Request.findByIdAndUpdate(id, save);
       res.json({ updatedRequest });
-    } else {
-      // IMPORTANT FIX
-      //res.status(500);
-      //res.json({ err: "Somehting went wrong with the request." });
     }
   } catch (e) {
-    // IMPORTANT FIX
-    // res.status(500);
-    // res.json({ err: e });
+    res.status(500);
+    console.log(e);
+    res.send("Error");
   }
 };
 

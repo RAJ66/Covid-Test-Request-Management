@@ -76,3 +76,15 @@ img {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+@media (max-width: 980px) {
+  .login-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 460px) {
+  .login-container {
+    width: 100%;
+  }
+}

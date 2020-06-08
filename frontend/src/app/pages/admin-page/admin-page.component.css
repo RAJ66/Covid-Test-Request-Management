@@ -1,18 +1,12 @@
 .container {
   display: flex;
   justify-content: space-between;
+  width: 90%;
+  max-width: 980px;
 }
 
 img {
   width: 100%;
-}
-
-.firstTests {
-  width: 50%;
-}
-
-.secondTests {
-  width: 50%;
 }
 
 .firstTestsCard {
@@ -27,6 +21,12 @@ img {
   margin-left: 15px;
 }
 
+.testsPerUser {
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
 .kpis {
   padding-top: 30px;
   width: 90%;
@@ -36,4 +36,13 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 20px;
+}
+.graftAdmin {
+  width: 90%;
+  max-width: 980px;
+  margin: auto;
+}
+
+.grafts {
+  width: 100%;
 }

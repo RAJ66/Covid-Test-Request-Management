@@ -26,6 +26,17 @@ export class RegisterPageComponent implements OnInit {
 
   handleRegister(event): void {
     event.preventDefault();
+    if (
+      !this.nif ||
+      !this.email ||
+      !this.name ||
+      !this.password ||
+      !this.contact ||
+      !this.birthDate
+    ) {
+      alert('Complete Form');
+      return;
+    }
     if (this.user) {
       this.users
         .createUser(

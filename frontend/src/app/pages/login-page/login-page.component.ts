@@ -22,6 +22,10 @@ export class LoginPageComponent implements OnInit {
 
   handleSubmit(event): void {
     event.preventDefault();
+    if (!this.nif || !this.password) {
+      alert('Complete Form');
+      return;
+    }
     this.session.login(this.nif, this.password).subscribe(
       () => {
         const user = JSON.parse(localStorage.getItem('user'));

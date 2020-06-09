@@ -81,48 +81,39 @@ requestController.create = async function (req, res) {
     const userInfected = "Infected";
     const userSuspect = "Suspect";
 
-    let previousUserStates = [];
-    let infectedCount = 0;
+    let infected = false;
+    let done = true;
 
-    const allRequests = await Request.find();
+    const allRequests = await Request.find({ userId: req.body.userId });
 
     allRequests.map((request) => {
-      if (request.userId == req.body.userId) {
-        previousUserStates.push(request.userState);
+      if (request.userState == userInfected) {
+        infected = true;
+      }
+      if (request.requestState !== "Done") {
+        done = false;
       }
     });
 
-    if (allRequests.length == 0) {
-      const result = await Request.create({
-        id: requestId,
-        userState: userSuspect,
-        ...req.body,
-      });
-      res.json({ result });
-    } else {
-      previousUserStates.map((result) => {
-        if (result == userInfected) {
-          infectedCount++;
-        }
-      });
-
-      if (infectedCount === 0) {
-        const result = await Request.create({
-          id: requestId,
-          userState: userSuspect,
-          ...req.body,
-        });
-
-        res.json({ result });
-      } else {
+    if (done) {
+      if (infected) {
         const result = await Request.create({
           id: requestId,
           userState: userInfected,
           ...req.body,
         });
-
+        res.json({ result });
+      } else {
+        const result = await Request.create({
+          id: requestId,
+          userState: userSuspect,
+          ...req.body,
+        });
         res.json({ result });
       }
+    } else {
+      res.status(500);
+      res.send("Cannot create another request because you have another open.");
     }
   } catch (e) {
     res.status(500);

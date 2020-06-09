@@ -32,10 +32,16 @@ export class CreateRequestPageComponent implements OnInit {
     this.request.saude24 = String(true) == this.saude24;
     this.request.userId = this.user._id;
 
-    this.requests.createRequest(this.request).subscribe((res) => {
-      if (!res.err) {
-        this.success = true;
+    this.requests.createRequest(this.request).subscribe(
+      (res) => {
+        if (!res.err) {
+          this.success = true;
+        }
+      },
+      (error) => {
+        alert(error.error);
+        console.log(error);
       }
-    });
+    );
   }
 }

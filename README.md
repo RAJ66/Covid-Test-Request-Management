@@ -8,3 +8,32 @@
 - [MongoDB](https://www.mongodb.com/)
 - [Angular](https://angular.io/)
 - [Angular Material](https://material.angular.io/)
+
+
+## Backend
+
+### To set up
+
+```
+$ npm install
+```
+
+### Run
+
+```
+$ npm start
+```
+
+## Frontend 
+
+### To set up
+
+```
+$ npm install
+```
+
+### Run
+
+```
+$ npm start
+```

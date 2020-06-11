@@ -350,8 +350,10 @@ requestController.status = async (req, res) => {
   let secondDates = [];
   let secondValues = [];
   for (data in secondTestsPerDay) {
-    secondDates.push(secondTestsPerDay[data].date);
-    secondValues.push(secondTestsPerDay[data].totalTests);
+    if (secondTestsPerDay[data].date !== null) {
+      secondDates.push(secondTestsPerDay[data].date);
+      secondValues.push(secondTestsPerDay[data].totalTests);
+    }
   }
 
   let usersIds = [];

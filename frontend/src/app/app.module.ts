@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +35,7 @@ import { ChangePasswordPageComponent } from './pages/change-password-page/change
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AdminUsersPageComponent } from './pages/admin-users-page/admin-users-page.component';
+import { SessionLostInterceptor } from './interceptors/session-lost.interceptor';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,13 @@ import { AdminUsersPageComponent } from './pages/admin-users-page/admin-users-pa
     DemoMaterialModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SessionLostInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
